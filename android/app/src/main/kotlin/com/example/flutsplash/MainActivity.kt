@@ -1,4 +1,4 @@
-package com.example.flutsplash
+package com.yashgarg.flutsplash
 
 import io.flutter.embedding.android.FlutterActivity
 

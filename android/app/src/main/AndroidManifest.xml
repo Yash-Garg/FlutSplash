@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutsplash">
+    package="com.yashgarg.flutsplash">
    <application
         android:label="flutsplash"
         android:icon="@mipmap/ic_launcher">

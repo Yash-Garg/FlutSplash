@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-String accessKey = "";
+String accessKey = env['ACCESS_KEY']!;
 String apiURL = "https://api.unsplash.com/photos/?client_id=$accessKey";
 
 class HomePage extends StatefulWidget {
