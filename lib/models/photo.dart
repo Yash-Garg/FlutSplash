@@ -10,19 +10,19 @@ part 'photo.g.dart';
 class Photo with _$Photo {
   factory Photo({
     required String id,
-    required DateTime createdAt,
-    required DateTime updatedAt,
+    required DateTime created_at,
+    required DateTime updated_at,
     required int width,
     required int height,
     required String color,
-    required String blurHash,
+    required String blur_hash,
     required dynamic description,
-    required String altDescription,
+    required String alt_description,
     required Urls urls,
     required PhotoLinks links,
     required List<dynamic> categories,
     required int likes,
-    required bool likedByUser,
+    required bool liked_by_user,
     required User user,
   }) = _Photo;
 

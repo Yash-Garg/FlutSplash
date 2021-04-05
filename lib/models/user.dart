@@ -9,12 +9,12 @@ part 'user.g.dart';
 class User with _$User {
   factory User({
     required String id,
-    required DateTime updatedAt,
+    required DateTime updated_at,
     required String username,
     required String name,
-    required String firstName,
+    required String first_name,
     required UserLinks links,
-    required ProfileImage profileImage,
+    required ProfileImage profile_image,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

@@ -22,20 +22,20 @@ class _$UserTearOff {
 
   _User call(
       {required String id,
-      required DateTime updatedAt,
+      required DateTime updated_at,
       required String username,
       required String name,
-      required String firstName,
+      required String first_name,
       required UserLinks links,
-      required ProfileImage profileImage}) {
+      required ProfileImage profile_image}) {
     return _User(
       id: id,
-      updatedAt: updatedAt,
+      updated_at: updated_at,
       username: username,
       name: name,
-      firstName: firstName,
+      first_name: first_name,
       links: links,
-      profileImage: profileImage,
+      profile_image: profile_image,
     );
   }
 
@@ -50,12 +50,12 @@ const $User = _$UserTearOff();
 /// @nodoc
 mixin _$User {
   String get id => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  DateTime get updated_at => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get firstName => throw _privateConstructorUsedError;
+  String get first_name => throw _privateConstructorUsedError;
   UserLinks get links => throw _privateConstructorUsedError;
-  ProfileImage get profileImage => throw _privateConstructorUsedError;
+  ProfileImage get profile_image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -68,15 +68,15 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res>;
   $Res call(
       {String id,
-      DateTime updatedAt,
+      DateTime updated_at,
       String username,
       String name,
-      String firstName,
+      String first_name,
       UserLinks links,
-      ProfileImage profileImage});
+      ProfileImage profile_image});
 
   $UserLinksCopyWith<$Res> get links;
-  $ProfileImageCopyWith<$Res> get profileImage;
+  $ProfileImageCopyWith<$Res> get profile_image;
 }
 
 /// @nodoc
@@ -90,21 +90,21 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? updatedAt = freezed,
+    Object? updated_at = freezed,
     Object? username = freezed,
     Object? name = freezed,
-    Object? firstName = freezed,
+    Object? first_name = freezed,
     Object? links = freezed,
-    Object? profileImage = freezed,
+    Object? profile_image = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      updatedAt: updatedAt == freezed
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
+      updated_at: updated_at == freezed
+          ? _value.updated_at
+          : updated_at // ignore: cast_nullable_to_non_nullable
               as DateTime,
       username: username == freezed
           ? _value.username
@@ -114,17 +114,17 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      firstName: firstName == freezed
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
+      first_name: first_name == freezed
+          ? _value.first_name
+          : first_name // ignore: cast_nullable_to_non_nullable
               as String,
       links: links == freezed
           ? _value.links
           : links // ignore: cast_nullable_to_non_nullable
               as UserLinks,
-      profileImage: profileImage == freezed
-          ? _value.profileImage
-          : profileImage // ignore: cast_nullable_to_non_nullable
+      profile_image: profile_image == freezed
+          ? _value.profile_image
+          : profile_image // ignore: cast_nullable_to_non_nullable
               as ProfileImage,
     ));
   }
@@ -137,9 +137,9 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   }
 
   @override
-  $ProfileImageCopyWith<$Res> get profileImage {
-    return $ProfileImageCopyWith<$Res>(_value.profileImage, (value) {
-      return _then(_value.copyWith(profileImage: value));
+  $ProfileImageCopyWith<$Res> get profile_image {
+    return $ProfileImageCopyWith<$Res>(_value.profile_image, (value) {
+      return _then(_value.copyWith(profile_image: value));
     });
   }
 }
@@ -151,17 +151,17 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   $Res call(
       {String id,
-      DateTime updatedAt,
+      DateTime updated_at,
       String username,
       String name,
-      String firstName,
+      String first_name,
       UserLinks links,
-      ProfileImage profileImage});
+      ProfileImage profile_image});
 
   @override
   $UserLinksCopyWith<$Res> get links;
   @override
-  $ProfileImageCopyWith<$Res> get profileImage;
+  $ProfileImageCopyWith<$Res> get profile_image;
 }
 
 /// @nodoc
@@ -176,21 +176,21 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? updatedAt = freezed,
+    Object? updated_at = freezed,
     Object? username = freezed,
     Object? name = freezed,
-    Object? firstName = freezed,
+    Object? first_name = freezed,
     Object? links = freezed,
-    Object? profileImage = freezed,
+    Object? profile_image = freezed,
   }) {
     return _then(_User(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      updatedAt: updatedAt == freezed
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
+      updated_at: updated_at == freezed
+          ? _value.updated_at
+          : updated_at // ignore: cast_nullable_to_non_nullable
               as DateTime,
       username: username == freezed
           ? _value.username
@@ -200,17 +200,17 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      firstName: firstName == freezed
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
+      first_name: first_name == freezed
+          ? _value.first_name
+          : first_name // ignore: cast_nullable_to_non_nullable
               as String,
       links: links == freezed
           ? _value.links
           : links // ignore: cast_nullable_to_non_nullable
               as UserLinks,
-      profileImage: profileImage == freezed
-          ? _value.profileImage
-          : profileImage // ignore: cast_nullable_to_non_nullable
+      profile_image: profile_image == freezed
+          ? _value.profile_image
+          : profile_image // ignore: cast_nullable_to_non_nullable
               as ProfileImage,
     ));
   }
@@ -222,12 +222,12 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 class _$_User implements _User {
   _$_User(
       {required this.id,
-      required this.updatedAt,
+      required this.updated_at,
       required this.username,
       required this.name,
-      required this.firstName,
+      required this.first_name,
       required this.links,
-      required this.profileImage});
+      required this.profile_image});
 
   factory _$_User.fromJson(Map<String, dynamic> json) =>
       _$_$_UserFromJson(json);
@@ -235,21 +235,21 @@ class _$_User implements _User {
   @override
   final String id;
   @override
-  final DateTime updatedAt;
+  final DateTime updated_at;
   @override
   final String username;
   @override
   final String name;
   @override
-  final String firstName;
+  final String first_name;
   @override
   final UserLinks links;
   @override
-  final ProfileImage profileImage;
+  final ProfileImage profile_image;
 
   @override
   String toString() {
-    return 'User(id: $id, updatedAt: $updatedAt, username: $username, name: $name, firstName: $firstName, links: $links, profileImage: $profileImage)';
+    return 'User(id: $id, updated_at: $updated_at, username: $username, name: $name, first_name: $first_name, links: $links, profile_image: $profile_image)';
   }
 
   @override
@@ -258,34 +258,34 @@ class _$_User implements _User {
         (other is _User &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.updatedAt, updatedAt) ||
+            (identical(other.updated_at, updated_at) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedAt, updatedAt)) &&
+                    .equals(other.updated_at, updated_at)) &&
             (identical(other.username, username) ||
                 const DeepCollectionEquality()
                     .equals(other.username, username)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.firstName, firstName) ||
+            (identical(other.first_name, first_name) ||
                 const DeepCollectionEquality()
-                    .equals(other.firstName, firstName)) &&
+                    .equals(other.first_name, first_name)) &&
             (identical(other.links, links) ||
                 const DeepCollectionEquality().equals(other.links, links)) &&
-            (identical(other.profileImage, profileImage) ||
+            (identical(other.profile_image, profile_image) ||
                 const DeepCollectionEquality()
-                    .equals(other.profileImage, profileImage)));
+                    .equals(other.profile_image, profile_image)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(updatedAt) ^
+      const DeepCollectionEquality().hash(updated_at) ^
       const DeepCollectionEquality().hash(username) ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(firstName) ^
+      const DeepCollectionEquality().hash(first_name) ^
       const DeepCollectionEquality().hash(links) ^
-      const DeepCollectionEquality().hash(profileImage);
+      const DeepCollectionEquality().hash(profile_image);
 
   @JsonKey(ignore: true)
   @override
@@ -301,29 +301,29 @@ class _$_User implements _User {
 abstract class _User implements User {
   factory _User(
       {required String id,
-      required DateTime updatedAt,
+      required DateTime updated_at,
       required String username,
       required String name,
-      required String firstName,
+      required String first_name,
       required UserLinks links,
-      required ProfileImage profileImage}) = _$_User;
+      required ProfileImage profile_image}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
   String get id => throw _privateConstructorUsedError;
   @override
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  DateTime get updated_at => throw _privateConstructorUsedError;
   @override
   String get username => throw _privateConstructorUsedError;
   @override
   String get name => throw _privateConstructorUsedError;
   @override
-  String get firstName => throw _privateConstructorUsedError;
+  String get first_name => throw _privateConstructorUsedError;
   @override
   UserLinks get links => throw _privateConstructorUsedError;
   @override
-  ProfileImage get profileImage => throw _privateConstructorUsedError;
+  ProfileImage get profile_image => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UserCopyWith<_User> get copyWith => throw _privateConstructorUsedError;

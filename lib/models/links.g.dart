@@ -11,7 +11,7 @@ _$_PhotoLinks _$_$_PhotoLinksFromJson(Map<String, dynamic> json) {
     self: json['self'] as String,
     html: json['html'] as String,
     download: json['download'] as String,
-    downloadLocation: json['downloadLocation'] as String,
+    download_location: json['download_location'] as String,
   );
 }
 
@@ -20,7 +20,7 @@ Map<String, dynamic> _$_$_PhotoLinksToJson(_$_PhotoLinks instance) =>
       'self': instance.self,
       'html': instance.html,
       'download': instance.download,
-      'downloadLocation': instance.downloadLocation,
+      'download_location': instance.download_location,
     };
 
 _$_UserLinks _$_$_UserLinksFromJson(Map<String, dynamic> json) {

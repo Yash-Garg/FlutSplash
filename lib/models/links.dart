@@ -9,7 +9,7 @@ class PhotoLinks with _$PhotoLinks {
     required String self,
     required String html,
     required String download,
-    required String downloadLocation,
+    required String download_location,
   }) = _PhotoLinks;
 
   factory PhotoLinks.fromJson(Map<String, dynamic> json) =>

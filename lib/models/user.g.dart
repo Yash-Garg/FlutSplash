@@ -9,22 +9,22 @@ part of 'user.dart';
 _$_User _$_$_UserFromJson(Map<String, dynamic> json) {
   return _$_User(
     id: json['id'] as String,
-    updatedAt: DateTime.parse(json['updatedAt'] as String),
+    updated_at: DateTime.parse(json['updated_at'] as String),
     username: json['username'] as String,
     name: json['name'] as String,
-    firstName: json['firstName'] as String,
+    first_name: json['first_name'] as String,
     links: UserLinks.fromJson(json['links'] as Map<String, dynamic>),
-    profileImage:
-        ProfileImage.fromJson(json['profileImage'] as Map<String, dynamic>),
+    profile_image:
+        ProfileImage.fromJson(json['profile_image'] as Map<String, dynamic>),
   );
 }
 
 Map<String, dynamic> _$_$_UserToJson(_$_User instance) => <String, dynamic>{
       'id': instance.id,
-      'updatedAt': instance.updatedAt.toIso8601String(),
+      'updated_at': instance.updated_at.toIso8601String(),
       'username': instance.username,
       'name': instance.name,
-      'firstName': instance.firstName,
+      'first_name': instance.first_name,
       'links': instance.links,
-      'profileImage': instance.profileImage,
+      'profile_image': instance.profile_image,
     };

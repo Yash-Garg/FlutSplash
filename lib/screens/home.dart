@@ -51,10 +51,10 @@ class _HomePageState extends State<HomePage> {
                   itemCount: snapshot.data!.length,
                   itemBuilder: (BuildContext context, int index) {
                     var imageID = snapshot.data![index].id;
-                    //var imageDesc = snapshot.data![index].altDescription;
-                    var imageCreator = snapshot.data![index].user.firstName;
+                    var imageDesc = snapshot.data![index].alt_description;
+                    var imageCreator = snapshot.data![index].user.first_name;
                     var creatorUsername = snapshot.data![index].user.username;
-                    var imageCreatedAt = snapshot.data![index].createdAt;
+                    var imageCreatedAt = snapshot.data![index].created_at;
                     var imageHeight = snapshot.data![index].height;
                     var imageWidth = snapshot.data![index].width;
                     var webLink = snapshot.data![index].links.html;
@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           content: Text(
-                              "Photo by $imageCreator (@$creatorUsername on Unsplash)\n\nDescription: F\n\nCreated At : $imageCreatedAt\n\nDimensions : $imageWidth X $imageHeight"),
+                              "Photo by $imageCreator (@$creatorUsername on Unsplash)\n\nDescription: $imageDesc\n\nCreated At : $imageCreatedAt\n\nDimensions : $imageWidth X $imageHeight"),
                           actions: [
                             TextButton(
                               onPressed: () {

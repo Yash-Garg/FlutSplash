@@ -24,12 +24,12 @@ class _$PhotoLinksTearOff {
       {required String self,
       required String html,
       required String download,
-      required String downloadLocation}) {
+      required String download_location}) {
     return _PhotoLinks(
       self: self,
       html: html,
       download: download,
-      downloadLocation: downloadLocation,
+      download_location: download_location,
     );
   }
 
@@ -46,7 +46,7 @@ mixin _$PhotoLinks {
   String get self => throw _privateConstructorUsedError;
   String get html => throw _privateConstructorUsedError;
   String get download => throw _privateConstructorUsedError;
-  String get downloadLocation => throw _privateConstructorUsedError;
+  String get download_location => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -60,7 +60,7 @@ abstract class $PhotoLinksCopyWith<$Res> {
           PhotoLinks value, $Res Function(PhotoLinks) then) =
       _$PhotoLinksCopyWithImpl<$Res>;
   $Res call(
-      {String self, String html, String download, String downloadLocation});
+      {String self, String html, String download, String download_location});
 }
 
 /// @nodoc
@@ -76,7 +76,7 @@ class _$PhotoLinksCopyWithImpl<$Res> implements $PhotoLinksCopyWith<$Res> {
     Object? self = freezed,
     Object? html = freezed,
     Object? download = freezed,
-    Object? downloadLocation = freezed,
+    Object? download_location = freezed,
   }) {
     return _then(_value.copyWith(
       self: self == freezed
@@ -91,9 +91,9 @@ class _$PhotoLinksCopyWithImpl<$Res> implements $PhotoLinksCopyWith<$Res> {
           ? _value.download
           : download // ignore: cast_nullable_to_non_nullable
               as String,
-      downloadLocation: downloadLocation == freezed
-          ? _value.downloadLocation
-          : downloadLocation // ignore: cast_nullable_to_non_nullable
+      download_location: download_location == freezed
+          ? _value.download_location
+          : download_location // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -106,7 +106,7 @@ abstract class _$PhotoLinksCopyWith<$Res> implements $PhotoLinksCopyWith<$Res> {
       __$PhotoLinksCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String self, String html, String download, String downloadLocation});
+      {String self, String html, String download, String download_location});
 }
 
 /// @nodoc
@@ -124,7 +124,7 @@ class __$PhotoLinksCopyWithImpl<$Res> extends _$PhotoLinksCopyWithImpl<$Res>
     Object? self = freezed,
     Object? html = freezed,
     Object? download = freezed,
-    Object? downloadLocation = freezed,
+    Object? download_location = freezed,
   }) {
     return _then(_PhotoLinks(
       self: self == freezed
@@ -139,9 +139,9 @@ class __$PhotoLinksCopyWithImpl<$Res> extends _$PhotoLinksCopyWithImpl<$Res>
           ? _value.download
           : download // ignore: cast_nullable_to_non_nullable
               as String,
-      downloadLocation: downloadLocation == freezed
-          ? _value.downloadLocation
-          : downloadLocation // ignore: cast_nullable_to_non_nullable
+      download_location: download_location == freezed
+          ? _value.download_location
+          : download_location // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -155,7 +155,7 @@ class _$_PhotoLinks implements _PhotoLinks {
       {required this.self,
       required this.html,
       required this.download,
-      required this.downloadLocation});
+      required this.download_location});
 
   factory _$_PhotoLinks.fromJson(Map<String, dynamic> json) =>
       _$_$_PhotoLinksFromJson(json);
@@ -167,11 +167,11 @@ class _$_PhotoLinks implements _PhotoLinks {
   @override
   final String download;
   @override
-  final String downloadLocation;
+  final String download_location;
 
   @override
   String toString() {
-    return 'PhotoLinks(self: $self, html: $html, download: $download, downloadLocation: $downloadLocation)';
+    return 'PhotoLinks(self: $self, html: $html, download: $download, download_location: $download_location)';
   }
 
   @override
@@ -185,9 +185,9 @@ class _$_PhotoLinks implements _PhotoLinks {
             (identical(other.download, download) ||
                 const DeepCollectionEquality()
                     .equals(other.download, download)) &&
-            (identical(other.downloadLocation, downloadLocation) ||
+            (identical(other.download_location, download_location) ||
                 const DeepCollectionEquality()
-                    .equals(other.downloadLocation, downloadLocation)));
+                    .equals(other.download_location, download_location)));
   }
 
   @override
@@ -196,7 +196,7 @@ class _$_PhotoLinks implements _PhotoLinks {
       const DeepCollectionEquality().hash(self) ^
       const DeepCollectionEquality().hash(html) ^
       const DeepCollectionEquality().hash(download) ^
-      const DeepCollectionEquality().hash(downloadLocation);
+      const DeepCollectionEquality().hash(download_location);
 
   @JsonKey(ignore: true)
   @override
@@ -214,7 +214,7 @@ abstract class _PhotoLinks implements PhotoLinks {
       {required String self,
       required String html,
       required String download,
-      required String downloadLocation}) = _$_PhotoLinks;
+      required String download_location}) = _$_PhotoLinks;
 
   factory _PhotoLinks.fromJson(Map<String, dynamic> json) =
       _$_PhotoLinks.fromJson;
@@ -226,7 +226,7 @@ abstract class _PhotoLinks implements PhotoLinks {
   @override
   String get download => throw _privateConstructorUsedError;
   @override
-  String get downloadLocation => throw _privateConstructorUsedError;
+  String get download_location => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PhotoLinksCopyWith<_PhotoLinks> get copyWith =>
