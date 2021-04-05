@@ -1,6 +1,8 @@
-import 'package:flutsplash/pages/home_page.dart';
+import 'package:flutsplash/screens/home.dart';
+import 'package:flutsplash/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
@@ -13,7 +15,7 @@ const Color materialDark = Color(0xFF121212);
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,
       darkTheme: ThemeData(
@@ -25,6 +27,18 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: materialDark,
         fontFamily: GoogleFonts.workSans().fontFamily,
       ),
+      initialRoute: "/splash",
+      getPages: [
+        GetPage(
+          name: "/splash",
+          page: () => SplashScreen(),
+        ),
+        GetPage(
+          name: "/home",
+          page: () => HomePage(),
+          transition: Transition.rightToLeftWithFade,
+        ),
+      ],
       home: HomePage(),
     );
   }
