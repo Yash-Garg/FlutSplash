@@ -3,6 +3,7 @@ import 'package:flutsplash/models/photo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
 
 String accessKey = env['ACCESS_KEY']!;
 String apiURL =
@@ -42,23 +43,59 @@ class _HomePageState extends State<HomePage> {
           child: FutureBuilder(
             future: _getJsonData(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData)
+              if (snapshot.hasData) {
                 return StaggeredGridView.countBuilder(
                   shrinkWrap: true,
                   crossAxisCount: 4,
                   itemCount: snapshot.data!.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      height: MediaQuery.of(context).size.height * 0.75,
-                      width: MediaQuery.of(context).size.width * 0.50,
-                      margin: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(snapshot.data![index].urls.small),
-                          fit: BoxFit.cover,
+                    var imageID = snapshot.data![index].id;
+                    var imageDesc = snapshot.data![index].altDescription;
+                    var imageCreator = snapshot.data![index].user.firstName;
+                    var creatorUsername = snapshot.data![index].user.username;
+                    var imageCreatedAt = snapshot.data![index].createdAt;
+                    var imageHeight = snapshot.data![index].height;
+                    var imageWidth = snapshot.data![index].width;
+
+                    return InkWell(
+                      child: Container(
+                        height: MediaQuery.of(context).size.width * 0.75,
+                        width: MediaQuery.of(context).size.width * 0.50,
+                        margin: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image:
+                                NetworkImage(snapshot.data![index].urls.small),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.circular(5),
                         ),
-                        borderRadius: BorderRadius.circular(5),
                       ),
+                      onTap: () {
+                        final AlertDialog infoDialog = AlertDialog(
+                          title: Text(
+                            'About - $imageID',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          content: Text(
+                              "By : $imageCreator (@$creatorUsername)\n\nDescription: $imageDesc\n\nCreated At : $imageCreatedAt\n\nDimensions : $imageWidth X $imageHeight"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: Text(
+                                'OK',
+                                style: TextStyle(
+                                  color: Color(0xFF3690ff),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                        Get.dialog(infoDialog);
+                      },
                     );
                   },
                   staggeredTileBuilder: (int index) =>
@@ -66,11 +103,42 @@ class _HomePageState extends State<HomePage> {
                   mainAxisSpacing: 2.0,
                   crossAxisSpacing: 2.0,
                 );
-              else
+              } else {
                 return Center(child: CircularProgressIndicator());
+              }
             },
           ),
         ),
+        resizeToAvoidBottomInset: true,
+        bottomNavigationBar: new BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          child: new Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              IconButton(
+                  icon: Icon(Icons.menu),
+                  onPressed: () {},
+                  padding: EdgeInsets.all(15)),
+              Spacer(),
+              IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: () {},
+                  padding: EdgeInsets.all(15)),
+            ],
+          ),
+        ),
+        floatingActionButton: new FloatingActionButton(
+          child: IconButton(
+            icon: Icon(Icons.add),
+            iconSize: 40,
+            onPressed: null,
+            disabledColor: Colors.white,
+            alignment: Alignment.center,
+          ),
+          onPressed: () {},
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
   }

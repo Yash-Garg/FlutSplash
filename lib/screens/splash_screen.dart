@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Spacer(),
+                      Spacer(flex: 2),
                       Text(
                         "FlutSplash",
                         style: TextStyle(
@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           letterSpacing: 1,
                         ),
                       ),
-                      Spacer(),
+                      Spacer(flex: 2),
                       CircularProgressIndicator(),
                       Spacer(),
                     ],
