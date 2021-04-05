@@ -1,67 +1,33 @@
-class PhotoLinks {
-  PhotoLinks({
-    required this.self,
-    required this.html,
-    required this.download,
-    required this.downloadLocation,
-  });
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  String self;
-  String html;
-  String download;
-  String downloadLocation;
+part 'links.freezed.dart';
+part 'links.g.dart';
 
-  factory PhotoLinks.fromJson(Map<String, dynamic> json) => PhotoLinks(
-        self: json["self"],
-        html: json["html"],
-        download: json["download"],
-        downloadLocation: json["download_location"],
-      );
+@freezed
+class PhotoLinks with _$PhotoLinks {
+  factory PhotoLinks({
+    required String self,
+    required String html,
+    required String download,
+    required String downloadLocation,
+  }) = _PhotoLinks;
 
-  Map<String, dynamic> toJson() => {
-        "self": self,
-        "html": html,
-        "download": download,
-        "download_location": downloadLocation,
-      };
+  factory PhotoLinks.fromJson(Map<String, dynamic> json) =>
+      _$PhotoLinksFromJson(json);
 }
 
-class UserLinks {
-  UserLinks({
-    required this.self,
-    required this.html,
-    required this.photos,
-    required this.likes,
-    required this.portfolio,
-    required this.following,
-    required this.followers,
-  });
+@freezed
+class UserLinks with _$UserLinks {
+  factory UserLinks({
+    required String self,
+    required String html,
+    required String photos,
+    required String likes,
+    required String portfolio,
+    required String following,
+    required String followers,
+  }) = _UserLinks;
 
-  final String self;
-  final String html;
-  final String photos;
-  final String likes;
-  final String portfolio;
-  final String following;
-  final String followers;
-
-  factory UserLinks.fromJson(Map<String, dynamic> json) => UserLinks(
-        self: json["self"],
-        html: json["html"],
-        photos: json["photos"],
-        likes: json["likes"],
-        portfolio: json["portfolio"],
-        following: json["following"],
-        followers: json["followers"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "self": self,
-        "html": html,
-        "photos": photos,
-        "likes": likes,
-        "portfolio": portfolio,
-        "following": following,
-        "followers": followers,
-      };
+  factory UserLinks.fromJson(Map<String, dynamic> json) =>
+      _$UserLinksFromJson(json);
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 String accessKey = env['ACCESS_KEY']!;
 String apiURL =
@@ -50,12 +51,13 @@ class _HomePageState extends State<HomePage> {
                   itemCount: snapshot.data!.length,
                   itemBuilder: (BuildContext context, int index) {
                     var imageID = snapshot.data![index].id;
-                    var imageDesc = snapshot.data![index].altDescription;
+                    //var imageDesc = snapshot.data![index].altDescription;
                     var imageCreator = snapshot.data![index].user.firstName;
                     var creatorUsername = snapshot.data![index].user.username;
                     var imageCreatedAt = snapshot.data![index].createdAt;
                     var imageHeight = snapshot.data![index].height;
                     var imageWidth = snapshot.data![index].width;
+                    var webLink = snapshot.data![index].links.html;
 
                     return InkWell(
                       child: Container(
@@ -78,8 +80,20 @@ class _HomePageState extends State<HomePage> {
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           content: Text(
-                              "By : $imageCreator (@$creatorUsername)\n\nDescription: $imageDesc\n\nCreated At : $imageCreatedAt\n\nDimensions : $imageWidth X $imageHeight"),
+                              "Photo by $imageCreator (@$creatorUsername on Unsplash)\n\nDescription: F\n\nCreated At : $imageCreatedAt\n\nDimensions : $imageWidth X $imageHeight"),
                           actions: [
+                            TextButton(
+                              onPressed: () {
+                                launch("$webLink");
+                              },
+                              child: Text(
+                                'OPEN ON UNSPLASH',
+                                style: TextStyle(
+                                  color: Color(0xFF3690ff),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                             TextButton(
                               onPressed: () {
                                 Get.back();

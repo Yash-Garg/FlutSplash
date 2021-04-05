@@ -1,31 +1,17 @@
-class Urls {
-  Urls({
-    required this.raw,
-    required this.full,
-    required this.regular,
-    required this.small,
-    required this.thumb,
-  });
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  String raw;
-  String full;
-  String regular;
-  String small;
-  String thumb;
+part 'urls.freezed.dart';
+part 'urls.g.dart';
 
-  factory Urls.fromJson(Map<String, dynamic> json) => Urls(
-        raw: json["raw"],
-        full: json["full"],
-        regular: json["regular"],
-        small: json["small"],
-        thumb: json["thumb"],
-      );
+@freezed
+class Urls with _$Urls {
+  factory Urls({
+    required String raw,
+    required String full,
+    required String regular,
+    required String small,
+    required String thumb,
+  }) = _Urls;
 
-  Map<String, dynamic> toJson() => {
-        "raw": raw,
-        "full": full,
-        "regular": regular,
-        "small": small,
-        "thumb": thumb,
-      };
+  factory Urls.fromJson(Map<String, dynamic> json) => _$UrlsFromJson(json);
 }

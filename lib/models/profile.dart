@@ -1,23 +1,16 @@
-class ProfileImage {
-  ProfileImage({
-    required this.small,
-    required this.medium,
-    required this.large,
-  });
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  final String small;
-  final String medium;
-  final String large;
+part 'profile.freezed.dart';
+part 'profile.g.dart';
 
-  factory ProfileImage.fromJson(Map<String, dynamic> json) => ProfileImage(
-        small: json["small"],
-        medium: json["medium"],
-        large: json["large"],
-      );
+@freezed
+class ProfileImage with _$ProfileImage {
+  factory ProfileImage({
+    required String small,
+    required String medium,
+    required String large,
+  }) = _ProfileImage;
 
-  Map<String, dynamic> toJson() => {
-        "small": small,
-        "medium": medium,
-        "large": large,
-      };
+  factory ProfileImage.fromJson(Map<String, dynamic> json) =>
+      _$ProfileImageFromJson(json);
 }
