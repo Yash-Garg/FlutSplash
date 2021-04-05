@@ -32,6 +32,11 @@ class MyApp extends StatelessWidget {
           style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all<Color>(accentClr)),
         ),
+        snackBarTheme: SnackBarThemeData(
+          backgroundColor: materialDark,
+          actionTextColor: accentClr,
+          contentTextStyle: TextStyle(color: Colors.white),
+        ),
         fontFamily: GoogleFonts.workSans().fontFamily,
       ),
       initialRoute: "/splash",

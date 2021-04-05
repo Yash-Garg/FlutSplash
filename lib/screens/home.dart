@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:flutsplash/helpers.dart';
 import 'package:flutsplash/main.dart';
 import 'package:flutsplash/models/photo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:open_file/open_file.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 String accessKey = env['ACCESS_KEY']!;
@@ -68,6 +70,7 @@ class _HomePageState extends State<HomePage> {
                     var creatorProfile = snapshot.data![index].user.links.html;
                     var userImage =
                         snapshot.data![index].user.profile_image.medium;
+                    var rawURL = snapshot.data![index].urls.raw;
 
                     return Padding(
                       padding: EdgeInsets.all(5),
@@ -118,7 +121,40 @@ class _HomePageState extends State<HomePage> {
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
                                         OutlinedButton(
-                                          onPressed: () {},
+                                          onPressed: () async {
+                                            var status =
+                                                await requestPermissions();
+                                            var downloadPath =
+                                                await getPath("$imageID.jpeg");
+                                            if (status == true) {
+                                              await downloadFile("$rawURL",
+                                                  downloadPath, context);
+                                              var snackBar = SnackBar(
+                                                content: Text(
+                                                  "Downloaded File ID - $imageID",
+                                                  style: TextStyle(
+                                                      color: Colors.white70),
+                                                ),
+                                                duration: Duration(
+                                                    milliseconds: 3000),
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(7)),
+                                                ),
+                                                action: SnackBarAction(
+                                                  label: 'Open'.toUpperCase(),
+                                                  onPressed: () {
+                                                    OpenFile.open(downloadPath);
+                                                  },
+                                                ),
+                                              );
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(snackBar);
+                                            }
+                                          },
                                           child: Text(
                                             "DOWNLOAD",
                                             style: TextStyle(
