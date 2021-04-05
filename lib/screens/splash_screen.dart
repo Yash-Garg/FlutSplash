@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -42,6 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           fontSize: 40,
                           fontWeight: FontWeight.w800,
                           letterSpacing: 1,
+                          fontFamily: GoogleFonts.rubik().fontFamily,
                         ),
                       ),
                       Spacer(flex: 2),
