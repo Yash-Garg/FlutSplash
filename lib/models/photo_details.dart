@@ -1,3 +1,4 @@
+import 'package:flutsplash/models/links.dart';
 import 'package:flutsplash/models/urls.dart';
 import 'package:flutsplash/models/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -16,7 +17,7 @@ class PhotoDetails with _$PhotoDetails {
     required String color,
     required String blur_hash,
     required Urls urls,
-    required Links links,
+    required PhotoLinks links,
     required Exif exif,
     required User user,
     required int views,
@@ -39,16 +40,4 @@ class Exif with _$Exif {
   }) = _Exif;
 
   factory Exif.fromJson(Map<String, dynamic> json) => _$ExifFromJson(json);
-}
-
-@freezed
-class Links with _$Links {
-  factory Links({
-    required String self,
-    required String html,
-    required String download,
-    required String download_location,
-  }) = _Links;
-
-  factory Links.fromJson(Map<String, dynamic> json) => _$LinksFromJson(json);
 }

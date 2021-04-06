@@ -29,7 +29,7 @@ class _$PhotoDetailsTearOff {
       required String color,
       required String blur_hash,
       required Urls urls,
-      required Links links,
+      required PhotoLinks links,
       required Exif exif,
       required User user,
       required int views,
@@ -69,7 +69,7 @@ mixin _$PhotoDetails {
   String get color => throw _privateConstructorUsedError;
   String get blur_hash => throw _privateConstructorUsedError;
   Urls get urls => throw _privateConstructorUsedError;
-  Links get links => throw _privateConstructorUsedError;
+  PhotoLinks get links => throw _privateConstructorUsedError;
   Exif get exif => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
   int get views => throw _privateConstructorUsedError;
@@ -95,14 +95,14 @@ abstract class $PhotoDetailsCopyWith<$Res> {
       String color,
       String blur_hash,
       Urls urls,
-      Links links,
+      PhotoLinks links,
       Exif exif,
       User user,
       int views,
       int downloads});
 
   $UrlsCopyWith<$Res> get urls;
-  $LinksCopyWith<$Res> get links;
+  $PhotoLinksCopyWith<$Res> get links;
   $ExifCopyWith<$Res> get exif;
   $UserCopyWith<$Res> get user;
 }
@@ -167,7 +167,7 @@ class _$PhotoDetailsCopyWithImpl<$Res> implements $PhotoDetailsCopyWith<$Res> {
       links: links == freezed
           ? _value.links
           : links // ignore: cast_nullable_to_non_nullable
-              as Links,
+              as PhotoLinks,
       exif: exif == freezed
           ? _value.exif
           : exif // ignore: cast_nullable_to_non_nullable
@@ -195,8 +195,8 @@ class _$PhotoDetailsCopyWithImpl<$Res> implements $PhotoDetailsCopyWith<$Res> {
   }
 
   @override
-  $LinksCopyWith<$Res> get links {
-    return $LinksCopyWith<$Res>(_value.links, (value) {
+  $PhotoLinksCopyWith<$Res> get links {
+    return $PhotoLinksCopyWith<$Res>(_value.links, (value) {
       return _then(_value.copyWith(links: value));
     });
   }
@@ -232,7 +232,7 @@ abstract class _$PhotoDetailsCopyWith<$Res>
       String color,
       String blur_hash,
       Urls urls,
-      Links links,
+      PhotoLinks links,
       Exif exif,
       User user,
       int views,
@@ -241,7 +241,7 @@ abstract class _$PhotoDetailsCopyWith<$Res>
   @override
   $UrlsCopyWith<$Res> get urls;
   @override
-  $LinksCopyWith<$Res> get links;
+  $PhotoLinksCopyWith<$Res> get links;
   @override
   $ExifCopyWith<$Res> get exif;
   @override
@@ -310,7 +310,7 @@ class __$PhotoDetailsCopyWithImpl<$Res> extends _$PhotoDetailsCopyWithImpl<$Res>
       links: links == freezed
           ? _value.links
           : links // ignore: cast_nullable_to_non_nullable
-              as Links,
+              as PhotoLinks,
       exif: exif == freezed
           ? _value.exif
           : exif // ignore: cast_nullable_to_non_nullable
@@ -370,7 +370,7 @@ class _$_PhotoDetails implements _PhotoDetails {
   @override
   final Urls urls;
   @override
-  final Links links;
+  final PhotoLinks links;
   @override
   final Exif exif;
   @override
@@ -459,7 +459,7 @@ abstract class _PhotoDetails implements PhotoDetails {
       required String color,
       required String blur_hash,
       required Urls urls,
-      required Links links,
+      required PhotoLinks links,
       required Exif exif,
       required User user,
       required int views,
@@ -485,7 +485,7 @@ abstract class _PhotoDetails implements PhotoDetails {
   @override
   Urls get urls => throw _privateConstructorUsedError;
   @override
-  Links get links => throw _privateConstructorUsedError;
+  PhotoLinks get links => throw _privateConstructorUsedError;
   @override
   Exif get exif => throw _privateConstructorUsedError;
   @override
@@ -768,219 +768,4 @@ abstract class _Exif implements Exif {
   @override
   @JsonKey(ignore: true)
   _$ExifCopyWith<_Exif> get copyWith => throw _privateConstructorUsedError;
-}
-
-Links _$LinksFromJson(Map<String, dynamic> json) {
-  return _Links.fromJson(json);
-}
-
-/// @nodoc
-class _$LinksTearOff {
-  const _$LinksTearOff();
-
-  _Links call(
-      {required String self,
-      required String html,
-      required String download,
-      required String download_location}) {
-    return _Links(
-      self: self,
-      html: html,
-      download: download,
-      download_location: download_location,
-    );
-  }
-
-  Links fromJson(Map<String, Object> json) {
-    return Links.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Links = _$LinksTearOff();
-
-/// @nodoc
-mixin _$Links {
-  String get self => throw _privateConstructorUsedError;
-  String get html => throw _privateConstructorUsedError;
-  String get download => throw _privateConstructorUsedError;
-  String get download_location => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $LinksCopyWith<Links> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $LinksCopyWith<$Res> {
-  factory $LinksCopyWith(Links value, $Res Function(Links) then) =
-      _$LinksCopyWithImpl<$Res>;
-  $Res call(
-      {String self, String html, String download, String download_location});
-}
-
-/// @nodoc
-class _$LinksCopyWithImpl<$Res> implements $LinksCopyWith<$Res> {
-  _$LinksCopyWithImpl(this._value, this._then);
-
-  final Links _value;
-  // ignore: unused_field
-  final $Res Function(Links) _then;
-
-  @override
-  $Res call({
-    Object? self = freezed,
-    Object? html = freezed,
-    Object? download = freezed,
-    Object? download_location = freezed,
-  }) {
-    return _then(_value.copyWith(
-      self: self == freezed
-          ? _value.self
-          : self // ignore: cast_nullable_to_non_nullable
-              as String,
-      html: html == freezed
-          ? _value.html
-          : html // ignore: cast_nullable_to_non_nullable
-              as String,
-      download: download == freezed
-          ? _value.download
-          : download // ignore: cast_nullable_to_non_nullable
-              as String,
-      download_location: download_location == freezed
-          ? _value.download_location
-          : download_location // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-abstract class _$LinksCopyWith<$Res> implements $LinksCopyWith<$Res> {
-  factory _$LinksCopyWith(_Links value, $Res Function(_Links) then) =
-      __$LinksCopyWithImpl<$Res>;
-  @override
-  $Res call(
-      {String self, String html, String download, String download_location});
-}
-
-/// @nodoc
-class __$LinksCopyWithImpl<$Res> extends _$LinksCopyWithImpl<$Res>
-    implements _$LinksCopyWith<$Res> {
-  __$LinksCopyWithImpl(_Links _value, $Res Function(_Links) _then)
-      : super(_value, (v) => _then(v as _Links));
-
-  @override
-  _Links get _value => super._value as _Links;
-
-  @override
-  $Res call({
-    Object? self = freezed,
-    Object? html = freezed,
-    Object? download = freezed,
-    Object? download_location = freezed,
-  }) {
-    return _then(_Links(
-      self: self == freezed
-          ? _value.self
-          : self // ignore: cast_nullable_to_non_nullable
-              as String,
-      html: html == freezed
-          ? _value.html
-          : html // ignore: cast_nullable_to_non_nullable
-              as String,
-      download: download == freezed
-          ? _value.download
-          : download // ignore: cast_nullable_to_non_nullable
-              as String,
-      download_location: download_location == freezed
-          ? _value.download_location
-          : download_location // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-@JsonSerializable()
-
-/// @nodoc
-class _$_Links implements _Links {
-  _$_Links(
-      {required this.self,
-      required this.html,
-      required this.download,
-      required this.download_location});
-
-  factory _$_Links.fromJson(Map<String, dynamic> json) =>
-      _$_$_LinksFromJson(json);
-
-  @override
-  final String self;
-  @override
-  final String html;
-  @override
-  final String download;
-  @override
-  final String download_location;
-
-  @override
-  String toString() {
-    return 'Links(self: $self, html: $html, download: $download, download_location: $download_location)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _Links &&
-            (identical(other.self, self) ||
-                const DeepCollectionEquality().equals(other.self, self)) &&
-            (identical(other.html, html) ||
-                const DeepCollectionEquality().equals(other.html, html)) &&
-            (identical(other.download, download) ||
-                const DeepCollectionEquality()
-                    .equals(other.download, download)) &&
-            (identical(other.download_location, download_location) ||
-                const DeepCollectionEquality()
-                    .equals(other.download_location, download_location)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(self) ^
-      const DeepCollectionEquality().hash(html) ^
-      const DeepCollectionEquality().hash(download) ^
-      const DeepCollectionEquality().hash(download_location);
-
-  @JsonKey(ignore: true)
-  @override
-  _$LinksCopyWith<_Links> get copyWith =>
-      __$LinksCopyWithImpl<_Links>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$_$_LinksToJson(this);
-  }
-}
-
-abstract class _Links implements Links {
-  factory _Links(
-      {required String self,
-      required String html,
-      required String download,
-      required String download_location}) = _$_Links;
-
-  factory _Links.fromJson(Map<String, dynamic> json) = _$_Links.fromJson;
-
-  @override
-  String get self => throw _privateConstructorUsedError;
-  @override
-  String get html => throw _privateConstructorUsedError;
-  @override
-  String get download => throw _privateConstructorUsedError;
-  @override
-  String get download_location => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  _$LinksCopyWith<_Links> get copyWith => throw _privateConstructorUsedError;
 }

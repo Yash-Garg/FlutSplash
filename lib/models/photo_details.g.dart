@@ -16,7 +16,7 @@ _$_PhotoDetails _$_$_PhotoDetailsFromJson(Map<String, dynamic> json) {
     color: json['color'] as String,
     blur_hash: json['blur_hash'] as String,
     urls: Urls.fromJson(json['urls'] as Map<String, dynamic>),
-    links: Links.fromJson(json['links'] as Map<String, dynamic>),
+    links: PhotoLinks.fromJson(json['links'] as Map<String, dynamic>),
     exif: Exif.fromJson(json['exif'] as Map<String, dynamic>),
     user: User.fromJson(json['user'] as Map<String, dynamic>),
     views: json['views'] as int,
@@ -59,20 +59,4 @@ Map<String, dynamic> _$_$_ExifToJson(_$_Exif instance) => <String, dynamic>{
       'aperture': instance.aperture,
       'focal_length': instance.focal_length,
       'iso': instance.iso,
-    };
-
-_$_Links _$_$_LinksFromJson(Map<String, dynamic> json) {
-  return _$_Links(
-    self: json['self'] as String,
-    html: json['html'] as String,
-    download: json['download'] as String,
-    download_location: json['download_location'] as String,
-  );
-}
-
-Map<String, dynamic> _$_$_LinksToJson(_$_Links instance) => <String, dynamic>{
-      'self': instance.self,
-      'html': instance.html,
-      'download': instance.download,
-      'download_location': instance.download_location,
     };
