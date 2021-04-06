@@ -48,7 +48,22 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: [
                   new TabBar(
-                    tabs: [for (final tab in tabs) Tab(text: tab)],
+                    tabs: [
+                      for (final tab in tabs)
+                        Tab(
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              tab,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 0.8,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                        )
+                    ],
                   ),
                 ],
               ),
@@ -126,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                                         title: Text(
                                           "$imageCreator (@$creatorUsername)",
                                           style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
