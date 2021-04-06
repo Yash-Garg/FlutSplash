@@ -1,17 +1,13 @@
 import 'package:flutsplash/screens/home.dart';
 import 'package:flutsplash/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() async {
-  await DotEnv.load(fileName: ".env");
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 const Color materialDark = Color(0xFF121212);
-const Color accentClr = Color(0xFF00bac6);
+const Color accentClr = Color(0xFFFFFFFF);
 
 class MyApp extends StatelessWidget {
   @override

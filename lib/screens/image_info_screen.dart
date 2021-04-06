@@ -1,41 +1,75 @@
-import 'package:flutsplash/models/photo.dart';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ImageInfoScreen extends StatefulWidget {
-  final List<Photo> images;
-  final int id;
-  ImageInfoScreen({required List<Photo> images, required int id})
-      : this.images = images,
-        this.id = id;
+  final Map<String, dynamic> imageDetails;
+
+  ImageInfoScreen({required Map<String, dynamic> imageDetails})
+      : this.imageDetails = imageDetails;
+
   @override
-  _ImageInfoScreenState createState() => _ImageInfoScreenState(images, id);
+  _ImageInfoScreenState createState() => _ImageInfoScreenState(imageDetails);
 }
 
 class _ImageInfoScreenState extends State<ImageInfoScreen> {
-  _ImageInfoScreenState(List<Photo> images, int id);
+  _ImageInfoScreenState(Map<String, dynamic> imageDetails);
 
   @override
   Widget build(BuildContext context) {
-    var index = widget.id;
+    String webURL = widget.imageDetails['links']['html'];
+    String imgURL = widget.imageDetails['urls']['regular'];
+    String imgCreator = widget.imageDetails['user']['name'];
 
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           actions: [
-            IconButton(icon: Icon(Icons.open_in_browser), onPressed: () {}),
-            IconButton(icon: Icon(Icons.share), onPressed: () {})
+            IconButton(
+                icon: Icon(Icons.open_in_browser),
+                onPressed: () {
+                  launch("$webURL");
+                }),
+            IconButton(
+                icon: Icon(Icons.share),
+                onPressed: () {
+                  Share.share("Photo by $imgCreator on Unsplash\n$webURL");
+                })
           ],
         ),
         body: Container(
           child: Column(
             children: [
-              Image.network(widget.images[index].urls.regular),
-              ListTile(
-                title: Text("Created At : ${widget.images[index].created_at}"),
+              InkWell(
+                child: ClipRRect(
+                  child: Image.network(
+                    imgURL,
+                    height: MediaQuery.of(context).size.height * 0.30,
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                onTap: () {},
               ),
             ],
           ),
         ),
+        floatingActionButton: FloatingActionButton.extended(
+          label: Row(
+            children: [
+              Icon(Icons.wallpaper),
+              Padding(
+                child: Text(
+                  "SET AS WALLPAPER",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                padding: EdgeInsets.only(left: 10),
+              ),
+            ],
+          ),
+          onPressed: () {},
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),
     );
   }
