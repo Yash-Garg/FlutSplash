@@ -17,7 +17,6 @@ class Photo with _$Photo {
     required String color,
     required String blur_hash,
     required dynamic description,
-    required String alt_description,
     required Urls urls,
     required PhotoLinks links,
     required List<dynamic> categories,

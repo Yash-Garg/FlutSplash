@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:flutsplash/helpers.dart';
-import 'package:flutsplash/main.dart';
+// import 'package:flutsplash/helpers.dart';
 import 'package:flutsplash/models/photo.dart';
+import 'package:flutsplash/screens/image_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:open_file/open_file.dart';
+// import 'package:open_file/open_file.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 String accessKey = env['ACCESS_KEY']!;
@@ -18,13 +18,14 @@ class HomePage extends StatefulWidget {
 }
 
 final tabs = ["HOME", "COLLECTIONS"];
+Dio dio = new Dio();
 
 class _HomePageState extends State<HomePage> {
+  late List<Photo> imageList;
   Future _getJsonData() async {
-    Dio dio = new Dio();
     var response = await dio.get(apiURL);
     List<dynamic> jsonData = response.data;
-    List<Photo> imageList = jsonData.map((d) => Photo.fromJson(d)).toList();
+    imageList = jsonData.map((d) => Photo.fromJson(d)).toList();
     return imageList;
   }
 
@@ -57,8 +58,7 @@ class _HomePageState extends State<HomePage> {
                         shrinkWrap: true,
                         itemCount: snapshot.data!.length,
                         itemBuilder: (BuildContext context, int index) {
-                          var imageID = snapshot.data![index].id;
-                          var imageDesc = snapshot.data![index].alt_description;
+                          // var imageID = snapshot.data![index].id;
                           var imageCreator =
                               snapshot.data![index].user.first_name;
                           var creatorUsername =
@@ -66,17 +66,15 @@ class _HomePageState extends State<HomePage> {
                           var imageCreatedAt = snapshot.data![index].created_at
                               .toString()
                               .split(" ")[0];
-                          var imageHeight = snapshot.data![index].height;
-                          var imageWidth = snapshot.data![index].width;
-                          var imageLink = snapshot.data![index].urls.regular;
-                          var webLink = snapshot.data![index].links.html;
+                          var imageLink = snapshot.data![index].urls.small;
+                          // var webLink = snapshot.data![index].links.html;
                           var creatorProfile =
                               snapshot.data![index].user.links.html;
                           var userImage =
                               snapshot.data![index].user.profile_image.medium;
-                          var rawURL = snapshot.data![index].urls.raw;
-                          var imageDownloadLocation =
-                              snapshot.data![index].links.download_location;
+                          // var rawURL = snapshot.data![index].urls.raw;
+                          // var imageDownloadLocation =
+                          //     snapshot.data![index].links.download_location;
 
                           return Padding(
                             padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
@@ -86,9 +84,27 @@ class _HomePageState extends State<HomePage> {
                                 color: Color(0xFF2e2e2e),
                                 child: Column(
                                   children: [
-                                    InkWell(
-                                      onTap: () {},
-                                      child: Image.network("$imageLink"),
+                                    ClipRRect(
+                                      child: InkWell(
+                                        onTap: () {
+                                          Get.to(
+                                            ImageInfoScreen(
+                                                images: imageList, id: index),
+                                            transition:
+                                                Transition.cupertinoDialog,
+                                          );
+                                        },
+                                        child: Image.network(
+                                          "$imageLink",
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.25,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                                     ),
                                     InkWell(
                                       onTap: () {
@@ -117,124 +133,91 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                     ),
-                                    ButtonBar(
-                                      alignment: MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(10, 0, 0, 10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              OutlinedButton(
-                                                onPressed: () async {
-                                                  Dio dio = new Dio();
-                                                  var status =
-                                                      await requestPermissions();
-                                                  var downloadPath =
-                                                      await getPath(
-                                                          "$imageID.jpeg");
-                                                  if (status == true) {
-                                                    await dio.get(
-                                                        "$imageDownloadLocation&client_id=$accessKey");
-                                                    await downloadFile(
-                                                        "$rawURL",
-                                                        downloadPath,
-                                                        context);
-                                                    var snackBar = SnackBar(
-                                                      content: Text(
-                                                        "Downloaded File ID - $imageID",
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.white70),
-                                                      ),
-                                                      duration: Duration(
-                                                          milliseconds: 3000),
-                                                      behavior: SnackBarBehavior
-                                                          .floating,
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    7)),
-                                                      ),
-                                                      action: SnackBarAction(
-                                                        label: 'Open'
-                                                            .toUpperCase(),
-                                                        onPressed: () {
-                                                          OpenFile.open(
-                                                              downloadPath);
-                                                        },
-                                                      ),
-                                                    );
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(snackBar);
-                                                  }
-                                                },
-                                                child: Text(
-                                                  "DOWNLOAD",
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 10, right: 10)),
-                                              OutlinedButton(
-                                                onPressed: () {
-                                                  launch("$webLink");
-                                                },
-                                                child: Text(
-                                                  "OPEN ON UNSPLASH",
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 5, right: 5)),
-                                              IconButton(
-                                                icon: Icon(Icons.info_outline),
-                                                onPressed: () {
-                                                  final AlertDialog infoDialog =
-                                                      AlertDialog(
-                                                    title: Text(
-                                                      'About - $imageID',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                    content: Text(
-                                                        "Description : $imageDesc\n\nDimensions : $imageWidth X $imageHeight"),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () {
-                                                          Get.back();
-                                                        },
-                                                        child: Text(
-                                                          'OK',
-                                                          style: TextStyle(
-                                                            color: accentClr,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  );
-                                                  Get.dialog(infoDialog);
-                                                },
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                    // ButtonBar(
+                                    //   alignment: MainAxisAlignment.start,
+                                    //   children: [
+                                    //     Padding(
+                                    //       padding:
+                                    //           EdgeInsets.fromLTRB(10, 0, 0, 10),
+                                    //       child: Row(
+                                    //         mainAxisAlignment:
+                                    //             MainAxisAlignment.spaceEvenly,
+                                    //         children: [
+                                    //           OutlinedButton(
+                                    //             onPressed: () async {
+                                    //               var status =
+                                    //                   await requestPermissions();
+                                    //               var downloadPath =
+                                    //                   await getPath(
+                                    //                       "$imageID.jpeg");
+                                    //               if (status == true) {
+                                    //                 await dio.get(
+                                    //                     "$imageDownloadLocation&client_id=$accessKey");
+                                    //                 await downloadFile(
+                                    //                     "$rawURL",
+                                    //                     downloadPath,
+                                    //                     context);
+                                    //                 var snackBar = SnackBar(
+                                    //                   content: Text(
+                                    //                     "Downloaded File ID - $imageID",
+                                    //                     style: TextStyle(
+                                    //                         color:
+                                    //                             Colors.white70),
+                                    //                   ),
+                                    //                   duration: Duration(
+                                    //                       milliseconds: 3000),
+                                    //                   behavior: SnackBarBehavior
+                                    //                       .floating,
+                                    //                   shape:
+                                    //                       RoundedRectangleBorder(
+                                    //                     borderRadius:
+                                    //                         BorderRadius.all(
+                                    //                             Radius.circular(
+                                    //                                 7)),
+                                    //                   ),
+                                    //                   action: SnackBarAction(
+                                    //                     label: 'Open'
+                                    //                         .toUpperCase(),
+                                    //                     onPressed: () {
+                                    //                       OpenFile.open(
+                                    //                           downloadPath);
+                                    //                     },
+                                    //                   ),
+                                    //                 );
+                                    //                 ScaffoldMessenger.of(
+                                    //                         context)
+                                    //                     .showSnackBar(snackBar);
+                                    //               }
+                                    //             },
+                                    //             child: Text(
+                                    //               "DOWNLOAD",
+                                    //               style: TextStyle(
+                                    //                 fontWeight: FontWeight.bold,
+                                    //               ),
+                                    //             ),
+                                    //           ),
+                                    //           Padding(
+                                    //               padding: EdgeInsets.only(
+                                    //                   left: 10, right: 10)),
+                                    //           OutlinedButton(
+                                    //             onPressed: () {
+                                    //               launch("$webLink");
+                                    //             },
+                                    //             child: Text(
+                                    //               "OPEN ON UNSPLASH",
+                                    //               style: TextStyle(
+                                    //                 fontWeight: FontWeight.bold,
+                                    //               ),
+                                    //             ),
+                                    //           ),
+                                    //           Padding(
+                                    //               padding: EdgeInsets.only(
+                                    //                   left: 5, right: 5)),
+                                    //         ],
+                                    //       ),
+                                    //     ),
+                                    //   ],
+                                    // ),
                                   ],
                                 ),
                               ),

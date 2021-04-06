@@ -43,11 +43,11 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/splash",
           page: () => SplashScreen(),
+          transition: Transition.leftToRightWithFade,
         ),
         GetPage(
           name: "/home",
           page: () => HomePage(),
-          transition: Transition.rightToLeftWithFade,
         ),
       ],
       home: HomePage(),

@@ -29,7 +29,6 @@ class _$PhotoTearOff {
       required String color,
       required String blur_hash,
       required dynamic description,
-      required String alt_description,
       required Urls urls,
       required PhotoLinks links,
       required List<dynamic> categories,
@@ -45,7 +44,6 @@ class _$PhotoTearOff {
       color: color,
       blur_hash: blur_hash,
       description: description,
-      alt_description: alt_description,
       urls: urls,
       links: links,
       categories: categories,
@@ -73,7 +71,6 @@ mixin _$Photo {
   String get color => throw _privateConstructorUsedError;
   String get blur_hash => throw _privateConstructorUsedError;
   dynamic get description => throw _privateConstructorUsedError;
-  String get alt_description => throw _privateConstructorUsedError;
   Urls get urls => throw _privateConstructorUsedError;
   PhotoLinks get links => throw _privateConstructorUsedError;
   List<dynamic> get categories => throw _privateConstructorUsedError;
@@ -99,7 +96,6 @@ abstract class $PhotoCopyWith<$Res> {
       String color,
       String blur_hash,
       dynamic description,
-      String alt_description,
       Urls urls,
       PhotoLinks links,
       List<dynamic> categories,
@@ -130,7 +126,6 @@ class _$PhotoCopyWithImpl<$Res> implements $PhotoCopyWith<$Res> {
     Object? color = freezed,
     Object? blur_hash = freezed,
     Object? description = freezed,
-    Object? alt_description = freezed,
     Object? urls = freezed,
     Object? links = freezed,
     Object? categories = freezed,
@@ -171,10 +166,6 @@ class _$PhotoCopyWithImpl<$Res> implements $PhotoCopyWith<$Res> {
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      alt_description: alt_description == freezed
-          ? _value.alt_description
-          : alt_description // ignore: cast_nullable_to_non_nullable
-              as String,
       urls: urls == freezed
           ? _value.urls
           : urls // ignore: cast_nullable_to_non_nullable
@@ -238,7 +229,6 @@ abstract class _$PhotoCopyWith<$Res> implements $PhotoCopyWith<$Res> {
       String color,
       String blur_hash,
       dynamic description,
-      String alt_description,
       Urls urls,
       PhotoLinks links,
       List<dynamic> categories,
@@ -273,7 +263,6 @@ class __$PhotoCopyWithImpl<$Res> extends _$PhotoCopyWithImpl<$Res>
     Object? color = freezed,
     Object? blur_hash = freezed,
     Object? description = freezed,
-    Object? alt_description = freezed,
     Object? urls = freezed,
     Object? links = freezed,
     Object? categories = freezed,
@@ -314,10 +303,6 @@ class __$PhotoCopyWithImpl<$Res> extends _$PhotoCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      alt_description: alt_description == freezed
-          ? _value.alt_description
-          : alt_description // ignore: cast_nullable_to_non_nullable
-              as String,
       urls: urls == freezed
           ? _value.urls
           : urls // ignore: cast_nullable_to_non_nullable
@@ -359,7 +344,6 @@ class _$_Photo implements _Photo {
       required this.color,
       required this.blur_hash,
       required this.description,
-      required this.alt_description,
       required this.urls,
       required this.links,
       required this.categories,
@@ -387,8 +371,6 @@ class _$_Photo implements _Photo {
   @override
   final dynamic description;
   @override
-  final String alt_description;
-  @override
   final Urls urls;
   @override
   final PhotoLinks links;
@@ -403,7 +385,7 @@ class _$_Photo implements _Photo {
 
   @override
   String toString() {
-    return 'Photo(id: $id, created_at: $created_at, updated_at: $updated_at, width: $width, height: $height, color: $color, blur_hash: $blur_hash, description: $description, alt_description: $alt_description, urls: $urls, links: $links, categories: $categories, likes: $likes, liked_by_user: $liked_by_user, user: $user)';
+    return 'Photo(id: $id, created_at: $created_at, updated_at: $updated_at, width: $width, height: $height, color: $color, blur_hash: $blur_hash, description: $description, urls: $urls, links: $links, categories: $categories, likes: $likes, liked_by_user: $liked_by_user, user: $user)';
   }
 
   @override
@@ -430,9 +412,6 @@ class _$_Photo implements _Photo {
             (identical(other.description, description) ||
                 const DeepCollectionEquality()
                     .equals(other.description, description)) &&
-            (identical(other.alt_description, alt_description) ||
-                const DeepCollectionEquality()
-                    .equals(other.alt_description, alt_description)) &&
             (identical(other.urls, urls) ||
                 const DeepCollectionEquality().equals(other.urls, urls)) &&
             (identical(other.links, links) ||
@@ -460,7 +439,6 @@ class _$_Photo implements _Photo {
       const DeepCollectionEquality().hash(color) ^
       const DeepCollectionEquality().hash(blur_hash) ^
       const DeepCollectionEquality().hash(description) ^
-      const DeepCollectionEquality().hash(alt_description) ^
       const DeepCollectionEquality().hash(urls) ^
       const DeepCollectionEquality().hash(links) ^
       const DeepCollectionEquality().hash(categories) ^
@@ -489,7 +467,6 @@ abstract class _Photo implements Photo {
       required String color,
       required String blur_hash,
       required dynamic description,
-      required String alt_description,
       required Urls urls,
       required PhotoLinks links,
       required List<dynamic> categories,
@@ -515,8 +492,6 @@ abstract class _Photo implements Photo {
   String get blur_hash => throw _privateConstructorUsedError;
   @override
   dynamic get description => throw _privateConstructorUsedError;
-  @override
-  String get alt_description => throw _privateConstructorUsedError;
   @override
   Urls get urls => throw _privateConstructorUsedError;
   @override
