@@ -4,6 +4,7 @@ import 'package:flutsplash/screens/image_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutsplash/helpers/keys.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 String accessKey = Keys.UNSPLASH_API_CLIENT_ID;
@@ -146,12 +147,92 @@ class _HomePageState extends State<HomePage> {
                         },
                       );
                     } else {
-                      return Center(child: CircularProgressIndicator());
+                      return Shimmer.fromColors(
+                        child: ListView.builder(
+                          itemCount: 10,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+                              child: Card(
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.25,
+                                      width: MediaQuery.of(context).size.width,
+                                    ),
+                                    ListTile(
+                                      leading: CircleAvatar(),
+                                      title: Text(
+                                        "",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      subtitle: Padding(
+                                        padding: EdgeInsets.only(top: 5),
+                                        child: Text(
+                                          "",
+                                          style: TextStyle(fontSize: 15),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        baseColor: Color(0xFF2e2e2e),
+                        highlightColor: Colors.grey,
+                      );
                     }
                   },
                 ),
               ),
-              Container(),
+              // ADD SHIMMER TO COLLECTIONS TAB
+              // UNTIL IT IS IMPLEMENTED
+              Shimmer.fromColors(
+                child: ListView.builder(
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+                      child: Card(
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.25,
+                              width: MediaQuery.of(context).size.width,
+                            ),
+                            ListTile(
+                              leading: CircleAvatar(),
+                              title: Text(
+                                "",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              subtitle: Padding(
+                                padding: EdgeInsets.only(top: 5),
+                                child: Text(
+                                  "",
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                baseColor: Color(0xFF2e2e2e),
+                highlightColor: Colors.grey,
+              ),
             ],
           ),
           resizeToAvoidBottomInset: true,
