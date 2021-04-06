@@ -11,7 +11,7 @@ void main() async {
 }
 
 const Color materialDark = Color(0xFF121212);
-const Color accentClr = Color(0xFF48f0e5);
+const Color accentClr = Color(0xFF00bac6);
 
 class MyApp extends StatelessWidget {
   @override
@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
         primaryColor: materialDark,
         brightness: Brightness.dark,
-        backgroundColor: materialDark,
         accentColor: accentClr,
         scaffoldBackgroundColor: materialDark,
         bottomAppBarTheme: BottomAppBarTheme(color: Color(0xFF2e2e2e)),
