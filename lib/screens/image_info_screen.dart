@@ -41,6 +41,9 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
     var imageHeight = data['height'];
     var imageWidth = data['width'];
     var iso = data['exif']['iso'];
+    var likes = data['likes'];
+    var views = data['views'];
+    var downloads = data['downloads'];
 
     Future checkImage(String id) async {
       String imagePath = await getPath("$id.jpeg");
@@ -199,6 +202,48 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
                                 ),
                               ],
                             ),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                              child: Divider(
+                                color: Colors.white38,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: ListTile(
+                                    title: Text("Views"),
+                                    subtitle: Text("$views"),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: ListTile(
+                                    title: Text("Downloads"),
+                                    subtitle: Text("$downloads"),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: ListTile(
+                                    title: Text("Likes"),
+                                    subtitle: Text("$likes"),
+                                  ),
+                                )
+                              ],
+                            )
                           ],
                         ),
                       ),
