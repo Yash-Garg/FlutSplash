@@ -8,27 +8,31 @@ part of 'photo.dart';
 
 _$_Photo _$_$_PhotoFromJson(Map<String, dynamic> json) {
   return _$_Photo(
-    id: json['id'] as String,
-    created_at: DateTime.parse(json['created_at'] as String),
-    updated_at: DateTime.parse(json['updated_at'] as String),
-    width: json['width'] as int,
-    height: json['height'] as int,
-    color: json['color'] as String,
-    blur_hash: json['blur_hash'] as String,
+    id: json['id'] as String?,
+    created_at: json['created_at'] == null
+        ? null
+        : DateTime.parse(json['created_at'] as String),
+    updated_at: json['updated_at'] == null
+        ? null
+        : DateTime.parse(json['updated_at'] as String),
+    width: json['width'] as int?,
+    height: json['height'] as int?,
+    color: json['color'] as String?,
+    blur_hash: json['blur_hash'] as String?,
     description: json['description'],
     urls: Urls.fromJson(json['urls'] as Map<String, dynamic>),
     links: PhotoLinks.fromJson(json['links'] as Map<String, dynamic>),
     categories: json['categories'] as List<dynamic>,
-    likes: json['likes'] as int,
-    liked_by_user: json['liked_by_user'] as bool,
+    likes: json['likes'] as int?,
+    liked_by_user: json['liked_by_user'] as bool?,
     user: User.fromJson(json['user'] as Map<String, dynamic>),
   );
 }
 
 Map<String, dynamic> _$_$_PhotoToJson(_$_Photo instance) => <String, dynamic>{
       'id': instance.id,
-      'created_at': instance.created_at.toIso8601String(),
-      'updated_at': instance.updated_at.toIso8601String(),
+      'created_at': instance.created_at?.toIso8601String(),
+      'updated_at': instance.updated_at?.toIso8601String(),
       'width': instance.width,
       'height': instance.height,
       'color': instance.color,

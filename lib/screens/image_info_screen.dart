@@ -25,13 +25,22 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
   @override
   Widget build(BuildContext context) {
     String accessKey = Keys.UNSPLASH_API_CLIENT_ID;
-    String webURL = widget.imageDetails['links']['html'];
-    String imgURL = widget.imageDetails['urls']['small'];
-    String rawImgURL = widget.imageDetails['urls']['raw'];
-    String imgID = widget.imageDetails['id'];
-    String imgCreator = widget.imageDetails['user']['name'];
-    String downloadEndpoint = widget.imageDetails['links']['download_location'];
-    String creatorPic = widget.imageDetails['user']['profile_image']['medium'];
+    var data = widget.imageDetails;
+
+    var webURL = data['links']['html'];
+    var imgURL = data['urls']['small'];
+    var rawImgURL = data['urls']['raw'];
+    var imgID = data['id'];
+    var imgCreator = data['user']['name'];
+    var downloadEndpoint = data['links']['download_location'];
+    var creatorPic = data['user']['profile_image']['medium'];
+    var cameraModel = data['exif']['model'];
+    var exposureTime = data['exif']['exposure'];
+    var aperture = data['exif']['aperture'];
+    var focalLength = data['exif']['focal_length'];
+    var imageHeight = data['height'];
+    var imageWidth = data['width'];
+    var iso = data['exif']['iso'];
 
     Future checkImage(String id) async {
       String imagePath = await getPath("$id.jpeg");
@@ -133,9 +142,80 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
                             ),
                           ),
                         ],
-                      )
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Expanded(
+                                  child: ListTile(
+                                    title: Text("Camera"),
+                                    subtitle: Text("$cameraModel"),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: ListTile(
+                                    title: Text("Aperture"),
+                                    subtitle: Text("f/$aperture"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Expanded(
+                                  child: ListTile(
+                                    title: Text("Focal Length"),
+                                    subtitle: Text("${focalLength}mm"),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: ListTile(
+                                    title: Text("Shutter Speed"),
+                                    subtitle: Text("${exposureTime}s"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Expanded(
+                                  child: ListTile(
+                                    title: Text("ISO"),
+                                    subtitle: Text("${iso.toString()}"),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: ListTile(
+                                    title: Text("Dimensions"),
+                                    subtitle: Text(
+                                        "${imageWidth.toString()} x ${imageHeight.toString()}"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                              child: Divider(
+                                color: Colors.white38,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ],

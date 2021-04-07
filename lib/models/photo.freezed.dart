@@ -21,19 +21,19 @@ class _$PhotoTearOff {
   const _$PhotoTearOff();
 
   _Photo call(
-      {required String id,
-      required DateTime created_at,
-      required DateTime updated_at,
-      required int width,
-      required int height,
-      required String color,
-      required String blur_hash,
-      required dynamic description,
+      {required String? id,
+      required DateTime? created_at,
+      required DateTime? updated_at,
+      required int? width,
+      required int? height,
+      required String? color,
+      required String? blur_hash,
+      required dynamic? description,
       required Urls urls,
       required PhotoLinks links,
       required List<dynamic> categories,
-      required int likes,
-      required bool liked_by_user,
+      required int? likes,
+      required bool? liked_by_user,
       required User user}) {
     return _Photo(
       id: id,
@@ -63,19 +63,19 @@ const $Photo = _$PhotoTearOff();
 
 /// @nodoc
 mixin _$Photo {
-  String get id => throw _privateConstructorUsedError;
-  DateTime get created_at => throw _privateConstructorUsedError;
-  DateTime get updated_at => throw _privateConstructorUsedError;
-  int get width => throw _privateConstructorUsedError;
-  int get height => throw _privateConstructorUsedError;
-  String get color => throw _privateConstructorUsedError;
-  String get blur_hash => throw _privateConstructorUsedError;
-  dynamic get description => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  DateTime? get created_at => throw _privateConstructorUsedError;
+  DateTime? get updated_at => throw _privateConstructorUsedError;
+  int? get width => throw _privateConstructorUsedError;
+  int? get height => throw _privateConstructorUsedError;
+  String? get color => throw _privateConstructorUsedError;
+  String? get blur_hash => throw _privateConstructorUsedError;
+  dynamic? get description => throw _privateConstructorUsedError;
   Urls get urls => throw _privateConstructorUsedError;
   PhotoLinks get links => throw _privateConstructorUsedError;
   List<dynamic> get categories => throw _privateConstructorUsedError;
-  int get likes => throw _privateConstructorUsedError;
-  bool get liked_by_user => throw _privateConstructorUsedError;
+  int? get likes => throw _privateConstructorUsedError;
+  bool? get liked_by_user => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -88,19 +88,19 @@ abstract class $PhotoCopyWith<$Res> {
   factory $PhotoCopyWith(Photo value, $Res Function(Photo) then) =
       _$PhotoCopyWithImpl<$Res>;
   $Res call(
-      {String id,
-      DateTime created_at,
-      DateTime updated_at,
-      int width,
-      int height,
-      String color,
-      String blur_hash,
-      dynamic description,
+      {String? id,
+      DateTime? created_at,
+      DateTime? updated_at,
+      int? width,
+      int? height,
+      String? color,
+      String? blur_hash,
+      dynamic? description,
       Urls urls,
       PhotoLinks links,
       List<dynamic> categories,
-      int likes,
-      bool liked_by_user,
+      int? likes,
+      bool? liked_by_user,
       User user});
 
   $UrlsCopyWith<$Res> get urls;
@@ -137,35 +137,35 @@ class _$PhotoCopyWithImpl<$Res> implements $PhotoCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       created_at: created_at == freezed
           ? _value.created_at
           : created_at // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       updated_at: updated_at == freezed
           ? _value.updated_at
           : updated_at // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       width: width == freezed
           ? _value.width
           : width // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       height: height == freezed
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       color: color == freezed
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       blur_hash: blur_hash == freezed
           ? _value.blur_hash
           : blur_hash // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       urls: urls == freezed
           ? _value.urls
           : urls // ignore: cast_nullable_to_non_nullable
@@ -181,11 +181,11 @@ class _$PhotoCopyWithImpl<$Res> implements $PhotoCopyWith<$Res> {
       likes: likes == freezed
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       liked_by_user: liked_by_user == freezed
           ? _value.liked_by_user
           : liked_by_user // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -221,19 +221,19 @@ abstract class _$PhotoCopyWith<$Res> implements $PhotoCopyWith<$Res> {
       __$PhotoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
-      DateTime created_at,
-      DateTime updated_at,
-      int width,
-      int height,
-      String color,
-      String blur_hash,
-      dynamic description,
+      {String? id,
+      DateTime? created_at,
+      DateTime? updated_at,
+      int? width,
+      int? height,
+      String? color,
+      String? blur_hash,
+      dynamic? description,
       Urls urls,
       PhotoLinks links,
       List<dynamic> categories,
-      int likes,
-      bool liked_by_user,
+      int? likes,
+      bool? liked_by_user,
       User user});
 
   @override
@@ -274,35 +274,35 @@ class __$PhotoCopyWithImpl<$Res> extends _$PhotoCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       created_at: created_at == freezed
           ? _value.created_at
           : created_at // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       updated_at: updated_at == freezed
           ? _value.updated_at
           : updated_at // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       width: width == freezed
           ? _value.width
           : width // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       height: height == freezed
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       color: color == freezed
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       blur_hash: blur_hash == freezed
           ? _value.blur_hash
           : blur_hash // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       urls: urls == freezed
           ? _value.urls
           : urls // ignore: cast_nullable_to_non_nullable
@@ -318,11 +318,11 @@ class __$PhotoCopyWithImpl<$Res> extends _$PhotoCopyWithImpl<$Res>
       likes: likes == freezed
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       liked_by_user: liked_by_user == freezed
           ? _value.liked_by_user
           : liked_by_user // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -355,21 +355,21 @@ class _$_Photo implements _Photo {
       _$_$_PhotoFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
-  final DateTime created_at;
+  final DateTime? created_at;
   @override
-  final DateTime updated_at;
+  final DateTime? updated_at;
   @override
-  final int width;
+  final int? width;
   @override
-  final int height;
+  final int? height;
   @override
-  final String color;
+  final String? color;
   @override
-  final String blur_hash;
+  final String? blur_hash;
   @override
-  final dynamic description;
+  final dynamic? description;
   @override
   final Urls urls;
   @override
@@ -377,9 +377,9 @@ class _$_Photo implements _Photo {
   @override
   final List<dynamic> categories;
   @override
-  final int likes;
+  final int? likes;
   @override
-  final bool liked_by_user;
+  final bool? liked_by_user;
   @override
   final User user;
 
@@ -459,39 +459,39 @@ class _$_Photo implements _Photo {
 
 abstract class _Photo implements Photo {
   factory _Photo(
-      {required String id,
-      required DateTime created_at,
-      required DateTime updated_at,
-      required int width,
-      required int height,
-      required String color,
-      required String blur_hash,
-      required dynamic description,
+      {required String? id,
+      required DateTime? created_at,
+      required DateTime? updated_at,
+      required int? width,
+      required int? height,
+      required String? color,
+      required String? blur_hash,
+      required dynamic? description,
       required Urls urls,
       required PhotoLinks links,
       required List<dynamic> categories,
-      required int likes,
-      required bool liked_by_user,
+      required int? likes,
+      required bool? liked_by_user,
       required User user}) = _$_Photo;
 
   factory _Photo.fromJson(Map<String, dynamic> json) = _$_Photo.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   @override
-  DateTime get created_at => throw _privateConstructorUsedError;
+  DateTime? get created_at => throw _privateConstructorUsedError;
   @override
-  DateTime get updated_at => throw _privateConstructorUsedError;
+  DateTime? get updated_at => throw _privateConstructorUsedError;
   @override
-  int get width => throw _privateConstructorUsedError;
+  int? get width => throw _privateConstructorUsedError;
   @override
-  int get height => throw _privateConstructorUsedError;
+  int? get height => throw _privateConstructorUsedError;
   @override
-  String get color => throw _privateConstructorUsedError;
+  String? get color => throw _privateConstructorUsedError;
   @override
-  String get blur_hash => throw _privateConstructorUsedError;
+  String? get blur_hash => throw _privateConstructorUsedError;
   @override
-  dynamic get description => throw _privateConstructorUsedError;
+  dynamic? get description => throw _privateConstructorUsedError;
   @override
   Urls get urls => throw _privateConstructorUsedError;
   @override
@@ -499,9 +499,9 @@ abstract class _Photo implements Photo {
   @override
   List<dynamic> get categories => throw _privateConstructorUsedError;
   @override
-  int get likes => throw _privateConstructorUsedError;
+  int? get likes => throw _privateConstructorUsedError;
   @override
-  bool get liked_by_user => throw _privateConstructorUsedError;
+  bool? get liked_by_user => throw _privateConstructorUsedError;
   @override
   User get user => throw _privateConstructorUsedError;
   @override

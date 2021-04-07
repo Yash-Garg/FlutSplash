@@ -21,7 +21,9 @@ class _$ProfileImageTearOff {
   const _$ProfileImageTearOff();
 
   _ProfileImage call(
-      {required String small, required String medium, required String large}) {
+      {required String? small,
+      required String? medium,
+      required String? large}) {
     return _ProfileImage(
       small: small,
       medium: medium,
@@ -39,9 +41,9 @@ const $ProfileImage = _$ProfileImageTearOff();
 
 /// @nodoc
 mixin _$ProfileImage {
-  String get small => throw _privateConstructorUsedError;
-  String get medium => throw _privateConstructorUsedError;
-  String get large => throw _privateConstructorUsedError;
+  String? get small => throw _privateConstructorUsedError;
+  String? get medium => throw _privateConstructorUsedError;
+  String? get large => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,7 +56,7 @@ abstract class $ProfileImageCopyWith<$Res> {
   factory $ProfileImageCopyWith(
           ProfileImage value, $Res Function(ProfileImage) then) =
       _$ProfileImageCopyWithImpl<$Res>;
-  $Res call({String small, String medium, String large});
+  $Res call({String? small, String? medium, String? large});
 }
 
 /// @nodoc
@@ -75,15 +77,15 @@ class _$ProfileImageCopyWithImpl<$Res> implements $ProfileImageCopyWith<$Res> {
       small: small == freezed
           ? _value.small
           : small // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       medium: medium == freezed
           ? _value.medium
           : medium // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       large: large == freezed
           ? _value.large
           : large // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -95,7 +97,7 @@ abstract class _$ProfileImageCopyWith<$Res>
           _ProfileImage value, $Res Function(_ProfileImage) then) =
       __$ProfileImageCopyWithImpl<$Res>;
   @override
-  $Res call({String small, String medium, String large});
+  $Res call({String? small, String? medium, String? large});
 }
 
 /// @nodoc
@@ -118,15 +120,15 @@ class __$ProfileImageCopyWithImpl<$Res> extends _$ProfileImageCopyWithImpl<$Res>
       small: small == freezed
           ? _value.small
           : small // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       medium: medium == freezed
           ? _value.medium
           : medium // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       large: large == freezed
           ? _value.large
           : large // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -142,11 +144,11 @@ class _$_ProfileImage implements _ProfileImage {
       _$_$_ProfileImageFromJson(json);
 
   @override
-  final String small;
+  final String? small;
   @override
-  final String medium;
+  final String? medium;
   @override
-  final String large;
+  final String? large;
 
   @override
   String toString() {
@@ -185,19 +187,19 @@ class _$_ProfileImage implements _ProfileImage {
 
 abstract class _ProfileImage implements ProfileImage {
   factory _ProfileImage(
-      {required String small,
-      required String medium,
-      required String large}) = _$_ProfileImage;
+      {required String? small,
+      required String? medium,
+      required String? large}) = _$_ProfileImage;
 
   factory _ProfileImage.fromJson(Map<String, dynamic> json) =
       _$_ProfileImage.fromJson;
 
   @override
-  String get small => throw _privateConstructorUsedError;
+  String? get small => throw _privateConstructorUsedError;
   @override
-  String get medium => throw _privateConstructorUsedError;
+  String? get medium => throw _privateConstructorUsedError;
   @override
-  String get large => throw _privateConstructorUsedError;
+  String? get large => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ProfileImageCopyWith<_ProfileImage> get copyWith =>

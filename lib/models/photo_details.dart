@@ -9,19 +9,19 @@ part 'photo_details.g.dart';
 @freezed
 class PhotoDetails with _$PhotoDetails {
   factory PhotoDetails({
-    required String id,
-    required DateTime created_at,
-    required DateTime updated_at,
-    required int width,
-    required int height,
-    required String color,
-    required String blur_hash,
-    required Urls urls,
-    required PhotoLinks links,
-    required Exif exif,
-    required User user,
-    required int views,
-    required int downloads,
+    required String? id,
+    required DateTime? created_at,
+    required DateTime? updated_at,
+    required int? width,
+    required int? height,
+    required String? color,
+    required String? blur_hash,
+    required Urls? urls,
+    required PhotoLinks? links,
+    required Exif? exif,
+    required User? user,
+    required int? views,
+    required int? downloads,
   }) = _PhotoDetails;
 
   factory PhotoDetails.fromJson(Map<String, dynamic> json) =>
@@ -31,12 +31,12 @@ class PhotoDetails with _$PhotoDetails {
 @freezed
 class Exif with _$Exif {
   factory Exif({
-    required String make,
-    required String model,
-    required String exposure_time,
-    required String aperture,
-    required String focal_length,
-    required int iso,
+    required String? make,
+    required String? model,
+    required String? exposure_time,
+    required String? aperture,
+    required String? focal_length,
+    required int? iso,
   }) = _Exif;
 
   factory Exif.fromJson(Map<String, dynamic> json) => _$ExifFromJson(json);

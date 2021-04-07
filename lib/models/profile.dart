@@ -6,9 +6,9 @@ part 'profile.g.dart';
 @freezed
 class ProfileImage with _$ProfileImage {
   factory ProfileImage({
-    required String small,
-    required String medium,
-    required String large,
+    required String? small,
+    required String? medium,
+    required String? large,
   }) = _ProfileImage;
 
   factory ProfileImage.fromJson(Map<String, dynamic> json) =>

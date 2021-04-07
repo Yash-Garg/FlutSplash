@@ -21,11 +21,11 @@ class _$UserTearOff {
   const _$UserTearOff();
 
   _User call(
-      {required String id,
-      required DateTime updated_at,
-      required String username,
-      required String name,
-      required String first_name,
+      {required String? id,
+      required DateTime? updated_at,
+      required String? username,
+      required String? name,
+      required String? first_name,
       required UserLinks links,
       required ProfileImage profile_image}) {
     return _User(
@@ -49,11 +49,11 @@ const $User = _$UserTearOff();
 
 /// @nodoc
 mixin _$User {
-  String get id => throw _privateConstructorUsedError;
-  DateTime get updated_at => throw _privateConstructorUsedError;
-  String get username => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get first_name => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  DateTime? get updated_at => throw _privateConstructorUsedError;
+  String? get username => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get first_name => throw _privateConstructorUsedError;
   UserLinks get links => throw _privateConstructorUsedError;
   ProfileImage get profile_image => throw _privateConstructorUsedError;
 
@@ -67,11 +67,11 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
   $Res call(
-      {String id,
-      DateTime updated_at,
-      String username,
-      String name,
-      String first_name,
+      {String? id,
+      DateTime? updated_at,
+      String? username,
+      String? name,
+      String? first_name,
       UserLinks links,
       ProfileImage profile_image});
 
@@ -101,23 +101,23 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       updated_at: updated_at == freezed
           ? _value.updated_at
           : updated_at // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       first_name: first_name == freezed
           ? _value.first_name
           : first_name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       links: links == freezed
           ? _value.links
           : links // ignore: cast_nullable_to_non_nullable
@@ -150,11 +150,11 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$UserCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
-      DateTime updated_at,
-      String username,
-      String name,
-      String first_name,
+      {String? id,
+      DateTime? updated_at,
+      String? username,
+      String? name,
+      String? first_name,
       UserLinks links,
       ProfileImage profile_image});
 
@@ -187,23 +187,23 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       updated_at: updated_at == freezed
           ? _value.updated_at
           : updated_at // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       first_name: first_name == freezed
           ? _value.first_name
           : first_name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       links: links == freezed
           ? _value.links
           : links // ignore: cast_nullable_to_non_nullable
@@ -233,15 +233,15 @@ class _$_User implements _User {
       _$_$_UserFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
-  final DateTime updated_at;
+  final DateTime? updated_at;
   @override
-  final String username;
+  final String? username;
   @override
-  final String name;
+  final String? name;
   @override
-  final String first_name;
+  final String? first_name;
   @override
   final UserLinks links;
   @override
@@ -300,26 +300,26 @@ class _$_User implements _User {
 
 abstract class _User implements User {
   factory _User(
-      {required String id,
-      required DateTime updated_at,
-      required String username,
-      required String name,
-      required String first_name,
+      {required String? id,
+      required DateTime? updated_at,
+      required String? username,
+      required String? name,
+      required String? first_name,
       required UserLinks links,
       required ProfileImage profile_image}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   @override
-  DateTime get updated_at => throw _privateConstructorUsedError;
+  DateTime? get updated_at => throw _privateConstructorUsedError;
   @override
-  String get username => throw _privateConstructorUsedError;
+  String? get username => throw _privateConstructorUsedError;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   @override
-  String get first_name => throw _privateConstructorUsedError;
+  String? get first_name => throw _privateConstructorUsedError;
   @override
   UserLinks get links => throw _privateConstructorUsedError;
   @override

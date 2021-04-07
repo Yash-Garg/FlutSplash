@@ -8,10 +8,10 @@ part of 'links.dart';
 
 _$_PhotoLinks _$_$_PhotoLinksFromJson(Map<String, dynamic> json) {
   return _$_PhotoLinks(
-    self: json['self'] as String,
-    html: json['html'] as String,
-    download: json['download'] as String,
-    download_location: json['download_location'] as String,
+    self: json['self'] as String?,
+    html: json['html'] as String?,
+    download: json['download'] as String?,
+    download_location: json['download_location'] as String?,
   );
 }
 
@@ -25,13 +25,13 @@ Map<String, dynamic> _$_$_PhotoLinksToJson(_$_PhotoLinks instance) =>
 
 _$_UserLinks _$_$_UserLinksFromJson(Map<String, dynamic> json) {
   return _$_UserLinks(
-    self: json['self'] as String,
-    html: json['html'] as String,
-    photos: json['photos'] as String,
-    likes: json['likes'] as String,
-    portfolio: json['portfolio'] as String,
-    following: json['following'] as String,
-    followers: json['followers'] as String,
+    self: json['self'] as String?,
+    html: json['html'] as String?,
+    photos: json['photos'] as String?,
+    likes: json['likes'] as String?,
+    portfolio: json['portfolio'] as String?,
+    following: json['following'] as String?,
+    followers: json['followers'] as String?,
   );
 }
 

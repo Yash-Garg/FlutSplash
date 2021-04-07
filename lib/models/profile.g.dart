@@ -8,9 +8,9 @@ part of 'profile.dart';
 
 _$_ProfileImage _$_$_ProfileImageFromJson(Map<String, dynamic> json) {
   return _$_ProfileImage(
-    small: json['small'] as String,
-    medium: json['medium'] as String,
-    large: json['large'] as String,
+    small: json['small'] as String?,
+    medium: json['medium'] as String?,
+    large: json['large'] as String?,
   );
 }
 

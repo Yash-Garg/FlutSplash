@@ -6,10 +6,10 @@ part 'links.g.dart';
 @freezed
 class PhotoLinks with _$PhotoLinks {
   factory PhotoLinks({
-    required String self,
-    required String html,
-    required String download,
-    required String download_location,
+    required String? self,
+    required String? html,
+    required String? download,
+    required String? download_location,
   }) = _PhotoLinks;
 
   factory PhotoLinks.fromJson(Map<String, dynamic> json) =>
@@ -19,13 +19,13 @@ class PhotoLinks with _$PhotoLinks {
 @freezed
 class UserLinks with _$UserLinks {
   factory UserLinks({
-    required String self,
-    required String html,
-    required String photos,
-    required String likes,
-    required String portfolio,
-    required String following,
-    required String followers,
+    required String? self,
+    required String? html,
+    required String? photos,
+    required String? likes,
+    required String? portfolio,
+    required String? following,
+    required String? followers,
   }) = _UserLinks;
 
   factory UserLinks.fromJson(Map<String, dynamic> json) =>
