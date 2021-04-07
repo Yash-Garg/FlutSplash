@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 void main() => runApp(MyApp());
 
 const Color materialDark = Color(0xFF121212);
-const Color accentClr = Color(0xFFFFFFFF);
+const Color accentClr = Color(0xFFFFF0E8);
 
 class MyApp extends StatelessWidget {
   @override
