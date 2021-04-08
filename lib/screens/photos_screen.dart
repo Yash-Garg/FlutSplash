@@ -32,6 +32,7 @@ class _LatestPhotosState extends State<LatestPhotos>
 
   Future<void> _pullRefresh() async {
     List<Photo> data = await _getJsonData();
+    await Future.delayed(Duration(seconds: 1));
     setState(() {
       imageList = Future.value(data);
     });
