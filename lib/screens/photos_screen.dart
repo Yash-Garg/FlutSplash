@@ -30,7 +30,7 @@ class _LatestPhotosState extends State<LatestPhotos>
     imageList = _getJsonData();
   }
 
-  Future<void> _pullRefresh() async {
+  Future<void> _pullToRefreshPhotos() async {
     List<Photo> data = await _getJsonData();
     await Future.delayed(Duration(seconds: 1));
     setState(() {
@@ -73,6 +73,7 @@ class _LatestPhotosState extends State<LatestPhotos>
                   var creatorProfile = snapshot.data![index].user.links.html;
                   var userImage =
                       snapshot.data![index].user.profile_image.medium;
+
                   return Padding(
                     padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
                     child: Card(
@@ -136,7 +137,7 @@ class _LatestPhotosState extends State<LatestPhotos>
                   );
                 },
               ),
-              onRefresh: _pullRefresh,
+              onRefresh: _pullToRefreshPhotos,
             );
           } else {
             return ShimmerCards();
