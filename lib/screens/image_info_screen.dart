@@ -1,9 +1,9 @@
 import 'dart:io' as io;
+import 'package:dio/dio.dart';
 import 'package:flutsplash/helpers/download_manager.dart';
 import 'package:flutsplash/helpers/keys.dart';
 import 'package:flutsplash/helpers/path_manager.dart';
 import 'package:flutsplash/helpers/permission_manager.dart';
-import 'package:flutsplash/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
 import 'package:share/share.dart';
@@ -24,6 +24,7 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Dio dio = new Dio();
     String accessKey = Keys.UNSPLASH_API_CLIENT_ID;
     var data = widget.imageDetails;
 
