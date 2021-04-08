@@ -294,6 +294,7 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
             } else if (status == true) {
               await dio.get("$downloadEndpoint&client_id=$accessKey");
               await downloadFile(rawImgURL, filePath, context);
+              OpenFile.open("$filePath");
             }
           },
         ),
