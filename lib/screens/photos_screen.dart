@@ -21,14 +21,26 @@ class _LatestPhotosState extends State<LatestPhotos>
   @override
   bool get wantKeepAlive => true;
 
-  late List<Photo> imageList;
+  late Future<List<Photo>> imageList;
   Dio dio = new Dio();
 
-  Future _getJsonData() async {
+  @override
+  void initState() {
+    super.initState();
+    imageList = _getJsonData();
+  }
+
+  Future<void> _pullRefresh() async {
+    List<Photo> data = await _getJsonData();
+    setState(() {
+      imageList = Future.value(data);
+    });
+  }
+
+  Future<List<Photo>> _getJsonData() async {
     var response = await dio.get(apiURL);
     List<dynamic> jsonData = response.data;
-    imageList = jsonData.map((d) => Photo.fromJson(d)).toList();
-    return imageList;
+    return jsonData.map((d) => Photo.fromJson(d)).toList();
   }
 
   Future _getImageDetails(String imageID) async {
@@ -43,83 +55,87 @@ class _LatestPhotosState extends State<LatestPhotos>
     super.build(context);
     return Container(
       child: FutureBuilder(
-        future: _getJsonData(),
+        future: imageList,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: snapshot.data!.length,
-              itemBuilder: (BuildContext context, int index) {
-                var imgID = snapshot.data![index].id;
-                var imageCreator = snapshot.data![index].user.first_name;
-                var creatorUsername = snapshot.data![index].user.username;
-                var imageCreatedAt =
-                    snapshot.data![index].created_at.toString().split(" ")[0];
-                var imageLink = snapshot.data![index].urls.small;
-                var creatorProfile = snapshot.data![index].user.links.html;
-                var userImage = snapshot.data![index].user.profile_image.medium;
-                return Padding(
-                  padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
-                  child: Card(
-                    clipBehavior: Clip.antiAlias,
-                    child: Ink(
-                      color: Color(0xFF2e2e2e),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ClipRRect(
-                            child: InkWell(
-                              onTap: () async {
-                                Map<String, dynamic> imgDetails =
-                                    await _getImageDetails("$imgID");
-                                Get.to(
-                                  ImageInfoScreen(
-                                    imageDetails: imgDetails,
-                                  ),
-                                  transition: Transition.cupertinoDialog,
-                                );
+            return RefreshIndicator(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: snapshot.data!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  var imgID = snapshot.data![index].id;
+                  var imageCreator = snapshot.data![index].user.first_name;
+                  var creatorUsername = snapshot.data![index].user.username;
+                  var imageCreatedAt =
+                      snapshot.data![index].created_at.toString().split(" ")[0];
+                  var imageLink = snapshot.data![index].urls.small;
+                  var creatorProfile = snapshot.data![index].user.links.html;
+                  var userImage =
+                      snapshot.data![index].user.profile_image.medium;
+                  return Padding(
+                    padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+                    child: Card(
+                      clipBehavior: Clip.antiAlias,
+                      child: Ink(
+                        color: Color(0xFF2e2e2e),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ClipRRect(
+                              child: InkWell(
+                                onTap: () async {
+                                  Map<String, dynamic> imgDetails =
+                                      await _getImageDetails("$imgID");
+                                  Get.to(
+                                    ImageInfoScreen(
+                                      imageDetails: imgDetails,
+                                    ),
+                                    transition: Transition.cupertinoDialog,
+                                  );
+                                },
+                                child: Image.network(
+                                  "$imageLink",
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.25,
+                                  width: MediaQuery.of(context).size.width,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                launch("$creatorProfile");
                               },
-                              child: Image.network(
-                                "$imageLink",
-                                height:
-                                    MediaQuery.of(context).size.height * 0.25,
-                                width: MediaQuery.of(context).size.width,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              launch("$creatorProfile");
-                            },
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage: NetworkImage("$userImage"),
-                                radius: 25,
-                                backgroundColor: Colors.transparent,
-                              ),
-                              title: Text(
-                                "$imageCreator (@$creatorUsername)",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage: NetworkImage("$userImage"),
+                                  radius: 25,
+                                  backgroundColor: Colors.transparent,
                                 ),
-                              ),
-                              subtitle: Padding(
-                                padding: EdgeInsets.only(top: 5),
-                                child: Text(
-                                  "Uploaded on $imageCreatedAt",
-                                  style: TextStyle(fontSize: 15),
+                                title: Text(
+                                  "$imageCreator (@$creatorUsername)",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                subtitle: Padding(
+                                  padding: EdgeInsets.only(top: 5),
+                                  child: Text(
+                                    "Uploaded on $imageCreatedAt",
+                                    style: TextStyle(fontSize: 15),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
+              onRefresh: _pullRefresh,
             );
           } else {
             return ShimmerCards();
