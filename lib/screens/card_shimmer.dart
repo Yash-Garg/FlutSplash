@@ -1,3 +1,4 @@
+import 'package:flutsplash/main.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -16,6 +17,7 @@ class _ShimmerCardsState extends State<ShimmerCards> {
           return Padding(
             padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
             child: Card(
+              elevation: 5,
               child: Column(
                 children: [
                   SizedBox(
@@ -45,8 +47,8 @@ class _ShimmerCardsState extends State<ShimmerCards> {
           );
         },
       ),
-      baseColor: Color(0xFF2e2e2e),
-      highlightColor: Colors.grey,
+      baseColor: accentClr,
+      highlightColor: Color(0xFFebebeb),
     );
   }
 }

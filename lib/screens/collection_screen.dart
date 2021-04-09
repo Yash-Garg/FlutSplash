@@ -69,9 +69,10 @@ class _LatestCollectionsState extends State<LatestCollections>
                   return Padding(
                     padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
                     child: Card(
+                      elevation: 5,
                       clipBehavior: Clip.antiAlias,
                       child: Ink(
-                        color: Color(0xFF2e2e2e),
+                        color: Colors.transparent,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -99,6 +100,7 @@ class _LatestCollectionsState extends State<LatestCollections>
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),

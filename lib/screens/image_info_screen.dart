@@ -67,7 +67,7 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
                   Share.share("Photo by $imgCreator on Unsplash\n$webURL");
                 })
           ],
-          backgroundColor: Colors.black12,
+          backgroundColor: Colors.transparent,
           elevation: 0.0,
         ),
         extendBodyBehindAppBar: true,
@@ -81,6 +81,8 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
                     height: MediaQuery.of(context).size.height * 0.35,
                     width: MediaQuery.of(context).size.width,
                     fit: BoxFit.cover,
+                    color: Colors.black26,
+                    colorBlendMode: BlendMode.multiply,
                   ),
                 ),
                 onTap: () {},
@@ -147,7 +149,7 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
                             child: Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
                               child: Divider(
-                                color: Colors.white38,
+                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -219,7 +221,7 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
                             child: Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
                               child: Divider(
-                                color: Colors.white38,
+                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -258,7 +260,7 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
                             child: Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
                               child: Divider(
-                                color: Colors.white38,
+                                color: Colors.black,
                               ),
                             ),
                           ),

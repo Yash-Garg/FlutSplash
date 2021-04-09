@@ -77,9 +77,10 @@ class _LatestPhotosState extends State<LatestPhotos>
                   return Padding(
                     padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
                     child: Card(
+                      elevation: 5,
                       clipBehavior: Clip.antiAlias,
                       child: Ink(
-                        color: Color(0xFF2e2e2e),
+                        color: Colors.transparent,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

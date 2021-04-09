@@ -11,7 +11,7 @@ Future downloadFile(String url, String savePath, BuildContext ctx) async {
     max: 100,
     msg: 'Downloading file...',
     progressType: ProgressType.valuable,
-    backgroundColor: materialDark,
+    backgroundColor: Color(0xFF121212),
     progressValueColor: accentClr,
     progressBgColor: Colors.white70,
     msgColor: Colors.white,

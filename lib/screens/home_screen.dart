@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
         child: IconButton(
           icon: Icon(Icons.add),
           onPressed: null,
-          disabledColor: Colors.black,
+          disabledColor: Colors.white,
           alignment: Alignment.center,
         ),
         onPressed: () {},
@@ -64,6 +64,7 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 0.8,
                                 fontSize: 15,
+                                color: Colors.black,
                               ),
                             ),
                           ),

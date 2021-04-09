@@ -1,36 +1,34 @@
 import 'package:flutsplash/screens/home_screen.dart';
 import 'package:flutsplash/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(MyApp());
 
-const Color materialDark = Color(0xFF121212);
 const Color accentClr = Color(0xFFFFF0E8);
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: accentClr,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+    );
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.dark,
-      darkTheme: ThemeData(
-        primarySwatch: Colors.grey,
-        primaryColor: materialDark,
-        brightness: Brightness.dark,
-        accentColor: accentClr,
-        scaffoldBackgroundColor: materialDark,
-        bottomAppBarTheme: BottomAppBarTheme(color: Color(0xFF2e2e2e)),
-        dialogBackgroundColor: materialDark,
+      themeMode: ThemeMode.light,
+      theme: ThemeData(
+        accentColor: Colors.black,
+        scaffoldBackgroundColor: Color(0xFFFFF7EF),
+        cardColor: accentClr,
+        bottomAppBarTheme: BottomAppBarTheme(color: accentClr.withOpacity(0.8)),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all<Color>(accentClr)),
-        ),
-        snackBarTheme: SnackBarThemeData(
-          backgroundColor: materialDark,
-          actionTextColor: accentClr,
-          contentTextStyle: TextStyle(color: Colors.white),
         ),
         fontFamily: GoogleFonts.workSans().fontFamily,
       ),
