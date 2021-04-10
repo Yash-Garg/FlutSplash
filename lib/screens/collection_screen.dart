@@ -69,7 +69,7 @@ class _LatestCollectionsState extends State<LatestCollections>
                   return Padding(
                     padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
                     child: Card(
-                      elevation: 5,
+                      elevation: 3,
                       clipBehavior: Clip.antiAlias,
                       child: Ink(
                         color: Colors.transparent,

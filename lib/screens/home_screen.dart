@@ -48,55 +48,53 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: DefaultTabController(
-        length: tabs.length,
-        child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(Icons.menu),
+    return DefaultTabController(
+      length: tabs.length,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.menu),
+            disabledColor: Colors.black,
+            onPressed: null,
+          ),
+          title: Center(
+            child: Text(
+              "FlutSplash",
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 24,
+                color: Colors.black,
+                fontFamily: GoogleFonts.paytoneOne().fontFamily,
+                letterSpacing: 1,
+              ),
+            ),
+          ),
+          bottom: _buildTabBar(),
+          actions: [
+            IconButton(
+              icon: FaIcon(FontAwesomeIcons.github, color: Colors.black),
               disabledColor: Colors.black,
-              onPressed: null,
-            ),
-            title: Center(
-              child: Text(
-                "FlutSplash",
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 24,
-                  color: Colors.black,
-                  fontFamily: GoogleFonts.paytoneOne().fontFamily,
-                  letterSpacing: 1,
-                ),
-              ),
-            ),
-            bottom: _buildTabBar(),
-            actions: [
-              IconButton(
-                icon: FaIcon(FontAwesomeIcons.github, color: Colors.black),
-                disabledColor: Colors.black,
-                onPressed: () {
-                  launch("https://github.com/Yash-Garg/FlutSplash");
-                },
-              )
-            ],
-          ),
-          body: TabBarView(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 5, bottom: 5),
-                child: LatestPhotos(),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 5, bottom: 5),
-                child: LatestCollections(),
-              ),
-            ],
-          ),
-          resizeToAvoidBottomInset: true,
-          floatingActionButton: _buildFab(),
-          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+              onPressed: () {
+                launch("https://github.com/Yash-Garg/FlutSplash");
+              },
+            )
+          ],
         ),
+        body: TabBarView(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 5, bottom: 5),
+              child: LatestPhotos(),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 5, bottom: 5),
+              child: LatestCollections(),
+            ),
+          ],
+        ),
+        resizeToAvoidBottomInset: true,
+        floatingActionButton: _buildFab(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),
     );
   }
