@@ -30,6 +30,10 @@ class MyApp extends StatelessWidget {
           style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all<Color>(accentClr)),
         ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: accentClr,
+          foregroundColor: Colors.black,
+        ),
         fontFamily: GoogleFonts.workSans().fontFamily,
       ),
       initialRoute: "/splash",

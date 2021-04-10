@@ -48,7 +48,7 @@ class _ShimmerCardsState extends State<ShimmerCards> {
         },
       ),
       baseColor: accentClr,
-      highlightColor: Color(0xFFebebeb),
+      highlightColor: Colors.white54,
     );
   }
 }
