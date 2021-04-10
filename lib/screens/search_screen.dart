@@ -44,10 +44,7 @@ class _SearchScreenState extends State<SearchScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Padding(
-            padding: EdgeInsets.all(5),
-            child: buildFloatingSearchBar(),
-          ),
+          buildFloatingSearchBar(),
         ],
       ),
     );
