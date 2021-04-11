@@ -1,5 +1,8 @@
+import 'package:dio/dio.dart';
+import 'package:flutsplash/helpers/keys.dart';
+import 'package:flutsplash/main.dart';
 import 'package:flutter/material.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -7,45 +10,75 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  Widget buildFloatingSearchBar() {
-    return FloatingSearchBar(
-      hint: 'Search photos...',
-      scrollPadding: const EdgeInsets.only(top: 25, bottom: 25),
-      transitionDuration: const Duration(milliseconds: 200),
-      debounceDelay: const Duration(milliseconds: 200),
-      onQueryChanged: (query) {
-        print(query);
-      },
-      transition: CircularFloatingSearchBarTransition(),
-      actions: [
-        FloatingSearchBarAction(
-          showIfOpened: false,
-          child: CircularButton(
-            icon: const Icon(Icons.close),
-            onPressed: () {},
+  String accessKey = Keys.UNSPLASH_API_CLIENT_ID;
+  TextEditingController searchController = new TextEditingController();
+  Dio dio = new Dio();
+  var searchResults;
+
+  Future _getSearchResults(String query) async {
+    String searchURL =
+        "https://api.unsplash.com/search/photos?query=$query&client_id=$accessKey";
+    var response = await dio.get(searchURL);
+    Map<String, dynamic> searchData = response.data;
+    return searchData;
+  }
+
+  Widget _buildSearchBar() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.black12,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      margin: EdgeInsets.symmetric(horizontal: 15),
+      padding: EdgeInsets.symmetric(horizontal: 15),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: TextField(
+              autofocus: true,
+              controller: searchController,
+              decoration: InputDecoration(
+                hintText: "Search images...",
+                border: InputBorder.none,
+              ),
+            ),
           ),
-        ),
-        FloatingSearchBarAction.searchToClear(
-          showIfClosed: false,
-        ),
-      ],
-      builder: (context, transition) {
-        // TODO: Yet to implement
-        return Container();
-      },
+          InkWell(onTap: () {}, child: Container(child: Icon(Icons.search)))
+        ],
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xFFf2e6df),
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          buildFloatingSearchBar(),
-        ],
+      backgroundColor: accentClr,
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            "Search Page",
+            style: TextStyle(
+              fontWeight: FontWeight.w900,
+              fontSize: 20,
+              color: Colors.black,
+              fontFamily: GoogleFonts.paytoneOne().fontFamily,
+              letterSpacing: 1,
+            ),
+          ),
+        ),
+        iconTheme: IconThemeData(color: Colors.black),
+        actions: [IconButton(icon: Icon(Icons.more_vert), onPressed: () {})],
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: [
+              SizedBox(height: 16),
+              _buildSearchBar(),
+              SizedBox(height: 30),
+            ],
+          ),
+        ),
       ),
     );
   }

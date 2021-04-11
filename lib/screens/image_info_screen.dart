@@ -74,6 +74,7 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
         brightness: Brightness.dark,
         elevation: 0.0,
       ),
+      resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
       body: Container(
         child: Column(
