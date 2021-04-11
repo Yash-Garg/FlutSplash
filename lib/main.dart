@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+      SystemUiOverlayStyle(statusBarColor: Colors.black.withOpacity(0.2)),
     );
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.black,
         scaffoldBackgroundColor: Color(0xFFFFF7EF),
         cardColor: accentClr,
-        bottomAppBarTheme: BottomAppBarTheme(color: accentClr.withOpacity(0.8)),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all<Color>(accentClr)),
