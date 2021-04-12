@@ -151,7 +151,6 @@ class _SearchScreenState extends State<SearchScreen> {
               children: [
                 SizedBox(height: 16),
                 _buildSearchBar(),
-                SizedBox(height: 30),
               ],
             ),
           ),
