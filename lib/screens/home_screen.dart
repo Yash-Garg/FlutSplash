@@ -53,9 +53,12 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.menu),
+            icon: Icon(Icons.settings),
             disabledColor: Colors.black,
-            onPressed: null,
+            color: Colors.black,
+            onPressed: () {
+              Get.toNamed('/settings');
+            },
           ),
           title: Center(
             child: Text(
