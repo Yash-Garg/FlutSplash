@@ -37,7 +37,7 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
     var downloadEndpoint = data['links']['download_location'];
     var creatorPic = data['user']['profile_image']['medium'];
     var cameraModel = data['exif']['model'];
-    var exposureTime = data['exif']['exposure'];
+    var exposureTime = data['exif']['exposure_time'];
     var aperture = data['exif']['aperture'];
     var focalLength = data['exif']['focal_length'];
     var imageHeight = data['height'];
