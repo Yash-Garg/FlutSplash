@@ -3,6 +3,7 @@ import 'package:flutsplash/helpers/keys.dart';
 import 'package:flutsplash/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -37,20 +38,27 @@ class _SearchScreenState extends State<SearchScreen> {
     super.dispose();
   }
 
-  Widget _noResults(String input) {
+  Widget _noResults(IconData icon, String input) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.4,
-      child: Align(
-        alignment: Alignment.center,
-        child: Text(
-          input,
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            fontStyle: FontStyle.italic,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          FaIcon(
+            icon,
+            size: 30,
           ),
-          textAlign: TextAlign.center,
-        ),
+          Padding(padding: EdgeInsets.only(top: 5, bottom: 5)),
+          Text(
+            input,
+            style: TextStyle(
+              fontSize: 23,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }
@@ -112,7 +120,8 @@ class _SearchScreenState extends State<SearchScreen> {
             padding: EdgeInsets.all(10),
             child: isSubmitted
                 ? _buildSearchResultList()
-                : _noResults("It's too empty here..")),
+                : _noResults(
+                    FontAwesomeIcons.hourglass, "It's too empty here..")),
       ],
     );
   }
@@ -148,7 +157,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 crossAxisSpacing: 2.0,
                 crossAxisCount: 4,
               )
-            : _noResults('No Results Found !'),
+            : _noResults(FontAwesomeIcons.timesCircle, 'No Results Found !'),
       ),
     );
   }
