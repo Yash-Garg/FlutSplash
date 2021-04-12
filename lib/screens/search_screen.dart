@@ -13,6 +13,7 @@ class _SearchScreenState extends State<SearchScreen> {
   String accessKey = Keys.UNSPLASH_API_CLIENT_ID;
   late TextEditingController searchController;
   var searchResults;
+  late bool hasResults;
   bool isSubmitted = false;
   Dio dio = new Dio();
 
@@ -34,6 +35,24 @@ class _SearchScreenState extends State<SearchScreen> {
   void dispose() {
     searchController.dispose();
     super.dispose();
+  }
+
+  Widget _noResults(String input) {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.4,
+      child: Align(
+        alignment: Alignment.center,
+        child: Text(
+          input,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
   }
 
   Widget _buildSearchBar() {
@@ -66,6 +85,11 @@ class _SearchScreenState extends State<SearchScreen> {
                   onSubmitted: (value) async {
                     searchResults = await _getSearchResults(value);
                     setState(() {
+                      if (searchResults["total"] == 0) {
+                        hasResults = false;
+                      } else {
+                        hasResults = true;
+                      }
                       isSubmitted = true;
                     });
                   },
@@ -85,57 +109,46 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(10),
-          child: isSubmitted
-              ? _buildSearchResultList()
-              : Container(
-                  height: MediaQuery.of(context).size.height * 0.6,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "It's too empty here..",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic,
-                      ),
-                    ),
-                  ),
-                ),
-        ),
+            padding: EdgeInsets.all(10),
+            child: isSubmitted
+                ? _buildSearchResultList()
+                : _noResults("It's too empty here..")),
       ],
     );
   }
 
   Widget _buildSearchResultList() {
     var data = searchResults["results"];
+
     return Container(
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: StaggeredGridView.countBuilder(
-          physics: ScrollPhysics(),
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: MediaQuery.of(context).size.height * 0.75,
-              width: MediaQuery.of(context).size.width * 0.50,
-              margin: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage("${data[index]['urls']['small']}"),
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.circular(5),
-              ),
-            );
-          },
-          staggeredTileBuilder: (int index) =>
-              new StaggeredTile.count(2, index.isEven ? 3 : 1.5),
-          shrinkWrap: true,
-          itemCount: data.length,
-          mainAxisSpacing: 2.0,
-          crossAxisSpacing: 2.0,
-          crossAxisCount: 4,
-        ),
+        child: hasResults
+            ? StaggeredGridView.countBuilder(
+                physics: ScrollPhysics(),
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    height: MediaQuery.of(context).size.height * 0.75,
+                    width: MediaQuery.of(context).size.width * 0.50,
+                    margin: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage("${data[index]['urls']['small']}"),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  );
+                },
+                staggeredTileBuilder: (int index) =>
+                    new StaggeredTile.count(2, index.isEven ? 3 : 1.5),
+                shrinkWrap: true,
+                itemCount: data.length,
+                mainAxisSpacing: 2.0,
+                crossAxisSpacing: 2.0,
+                crossAxisCount: 4,
+              )
+            : _noResults('No Results Found !'),
       ),
     );
   }
