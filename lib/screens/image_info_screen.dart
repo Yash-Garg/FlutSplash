@@ -29,6 +29,13 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
     String accessKey = Keys.UNSPLASH_API_CLIENT_ID;
     var data = widget.imageDetails;
 
+    // EXIF Data
+    var cameraModel = data['exif']['model'] ?? "Unknown";
+    var exposureTime = data['exif']['exposure_time'] ?? "Unknown ";
+    var aperture = data['exif']['aperture'] ?? "Unknown ";
+    var focalLength = data['exif']['focal_length'] ?? "Unknown ";
+    var iso = data['exif']['iso'] ?? "Unknown ";
+
     var webURL = data['links']['html'];
     var imgURL = data['urls']['small'];
     var rawImgURL = data['urls']['raw'];
@@ -36,13 +43,8 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
     var imgCreator = data['user']['name'];
     var downloadEndpoint = data['links']['download_location'];
     var creatorPic = data['user']['profile_image']['medium'];
-    var cameraModel = data['exif']['model'];
-    var exposureTime = data['exif']['exposure_time'];
-    var aperture = data['exif']['aperture'];
-    var focalLength = data['exif']['focal_length'];
     var imageHeight = data['height'];
     var imageWidth = data['width'];
-    var iso = data['exif']['iso'];
     var likes = data['likes'];
     var views = data['views'];
     var downloads = data['downloads'];
