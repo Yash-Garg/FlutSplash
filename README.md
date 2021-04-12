@@ -2,6 +2,7 @@
 
 | ![screen 1](https://raw.githubusercontent.com/Yash-Garg/FlutSplash/main/images/screen-1.png) | ![screen 2](https://raw.githubusercontent.com/Yash-Garg/FlutSplash/main/images/screen-2.png) |
 | :------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: |
+| ![screen 3](https://raw.githubusercontent.com/Yash-Garg/FlutSplash/main/images/screen-3.png) | ![screen 4](https://raw.githubusercontent.com/Yash-Garg/FlutSplash/main/images/screen-4.png) |
 
 ## License
 
