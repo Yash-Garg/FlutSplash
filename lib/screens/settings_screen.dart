@@ -55,7 +55,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                launch(
+                    "https://play.google.com/store/apps/details?id=com.yashgarg.flutsplash");
+              },
             ),
             InkWell(
               child: Container(
