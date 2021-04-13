@@ -41,10 +41,10 @@ android {
 
     defaultConfig {
         applicationId "com.yashgarg.flutsplash"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 30
-        versionCode 5
-        versionName "v1.4.0"
+        versionCode 6
+        versionName "v1.5.0"
         multiDexEnabled true
         ndk { debugSymbolLevel 'FULL' }
     }
