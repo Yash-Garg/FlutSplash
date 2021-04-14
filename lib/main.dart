@@ -1,5 +1,4 @@
 import 'package:flutsplash/screens/home_screen.dart';
-import 'package:flutsplash/screens/settings_screen.dart';
 import 'package:flutsplash/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -43,10 +42,6 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/home",
           page: () => HomePage(),
-        ),
-        GetPage(
-          name: "/settings",
-          page: () => SettingsScreen(),
         ),
       ],
       home: HomePage(),

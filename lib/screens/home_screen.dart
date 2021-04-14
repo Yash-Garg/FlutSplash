@@ -1,4 +1,6 @@
+import 'package:flutsplash/main.dart';
 import 'package:flutsplash/screens/collection_screen.dart';
+import 'package:flutsplash/screens/login_screen.dart';
 import 'package:flutsplash/screens/photos_screen.dart';
 import 'package:flutsplash/screens/search_screen.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,13 @@ class HomePage extends StatefulWidget {
 final tabs = ["HOME", "COLLECTIONS"];
 
 class _HomePageState extends State<HomePage> {
+  TextEditingController textController = new TextEditingController();
+  @override
+  void dispose() {
+    textController.dispose();
+    super.dispose();
+  }
+
   Widget _buildFab() => new FloatingActionButton(
         child: IconButton(
           icon: Icon(Icons.search),
@@ -46,25 +55,112 @@ class _HomePageState extends State<HomePage> {
         ],
       );
 
+  Widget _buildDrawer() => new Drawer(
+        child: Container(
+          height: double.infinity,
+          width: double.infinity,
+          color: accentClr,
+          child: ListView(
+            shrinkWrap: true,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    CircleAvatar(
+                      radius: 25,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'FlutSplash',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Divider(
+                height: 1,
+                thickness: 1,
+              ),
+              ListTile(
+                leading: Icon(Icons.login),
+                title: Text(
+                  "Login",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
+                ),
+                onTap: () async {
+                  showDialog(
+                      context: context,
+                      builder: (context) => authDialog(textController));
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.star_half),
+                title: Text(
+                  "Rate This App",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
+                ),
+                onTap: () {
+                  launch(
+                      "https://play.google.com/store/apps/details?id=com.yashgarg.flutsplash");
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.privacy_tip),
+                title: Text(
+                  "Privacy Policy",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
+                ),
+                onTap: () {
+                  launch(
+                      "https://gistpreview.github.io/?d183948f7bb24383f92688f66155d8b0/privacy-policy.html");
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.mail),
+                title: Text(
+                  "Contact",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
+                ),
+                onTap: () {
+                  launch("mailto:yashgarg.dev@gmail.com");
+                },
+              ),
+            ],
+          ),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: tabs.length,
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.settings),
-            disabledColor: Colors.black,
-            color: Colors.black,
-            onPressed: () {
-              Get.toNamed('/settings');
-            },
-          ),
           title: Center(
             child: Text(
               "FlutSplash",
               style: TextStyle(
-                fontWeight: FontWeight.w900,
                 fontSize: 24,
                 color: Colors.black,
                 fontFamily: GoogleFonts.paytoneOne().fontFamily,
@@ -82,7 +178,9 @@ class _HomePageState extends State<HomePage> {
               },
             )
           ],
+          iconTheme: IconThemeData(color: Colors.black),
         ),
+        drawer: _buildDrawer(),
         body: TabBarView(
           children: [
             Padding(
