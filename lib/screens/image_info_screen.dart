@@ -6,8 +6,10 @@ import 'package:flutsplash/helpers/keys.dart';
 import 'package:flutsplash/helpers/path_manager.dart';
 import 'package:flutsplash/helpers/permission_manager.dart';
 import 'package:flutsplash/models/photo_details.dart';
+import 'package:flutsplash/screens/fullscreen_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
 import 'package:share/share.dart';
 
@@ -93,7 +95,9 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
                   colorBlendMode: BlendMode.multiply,
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                Get.to(FullScreenImage(imageURL: rawImgURL));
+              },
             ),
             Wrap(
               children: [
