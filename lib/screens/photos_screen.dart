@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:flutsplash/helpers/chrome_custom_tabs.dart';
 import 'package:flutsplash/helpers/keys.dart';
 import 'package:flutsplash/models/photo.dart';
 import 'package:flutsplash/screens/card_shimmer.dart';
 import 'package:flutsplash/screens/image_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class LatestPhotos extends StatefulWidget {
   @override
@@ -107,7 +107,7 @@ class _LatestPhotosState extends State<LatestPhotos>
                             ),
                             InkWell(
                               onTap: () {
-                                launch("$creatorProfile");
+                                openCustomTab("$creatorProfile");
                               },
                               child: ListTile(
                                 leading: CircleAvatar(

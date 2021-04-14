@@ -1,5 +1,6 @@
 import 'dart:io' as io;
 import 'package:dio/dio.dart';
+import 'package:flutsplash/helpers/chrome_custom_tabs.dart';
 import 'package:flutsplash/helpers/download_manager.dart';
 import 'package:flutsplash/helpers/keys.dart';
 import 'package:flutsplash/helpers/path_manager.dart';
@@ -8,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:open_file/open_file.dart';
 import 'package:share/share.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ImageInfoScreen extends StatefulWidget {
   final Map<String, dynamic> imageDetails;
@@ -61,7 +61,7 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
           IconButton(
             icon: Icon(Icons.open_in_browser),
             onPressed: () {
-              launch("$webURL");
+              openCustomTab("$webURL");
             },
           ),
           IconButton(

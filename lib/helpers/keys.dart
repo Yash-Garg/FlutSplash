@@ -1,5 +1,4 @@
 class Keys {
-  // Don't worry the key doesn't work :P
   static String UNSPLASH_API_CLIENT_ID = '';
 
   static String UNSPLASH_API_SECRET_ID = '';

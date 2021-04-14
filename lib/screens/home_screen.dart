@@ -1,3 +1,4 @@
+import 'package:flutsplash/helpers/chrome_custom_tabs.dart';
 import 'package:flutsplash/main.dart';
 import 'package:flutsplash/screens/collection_screen.dart';
 import 'package:flutsplash/screens/photos_screen.dart';
@@ -124,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 onTap: () {
-                  launch(
+                  openCustomTab(
                       "https://play.google.com/store/apps/details?id=com.yashgarg.flutsplash");
                 },
               ),
@@ -142,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 onTap: () {
-                  launch(
+                  openCustomTab(
                       "https://gistpreview.github.io/?d183948f7bb24383f92688f66155d8b0/privacy-policy.html");
                 },
               ),
@@ -191,7 +192,7 @@ class _HomePageState extends State<HomePage> {
               icon: FaIcon(FontAwesomeIcons.github, color: Colors.black),
               disabledColor: Colors.black,
               onPressed: () {
-                launch("https://github.com/Yash-Garg/FlutSplash");
+                openCustomTab("https://github.com/Yash-Garg/FlutSplash");
               },
             )
           ],
