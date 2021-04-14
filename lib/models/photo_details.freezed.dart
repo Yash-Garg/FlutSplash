@@ -32,6 +32,7 @@ class _$PhotoDetailsTearOff {
       required PhotoLinks? links,
       required Exif? exif,
       required User? user,
+      required int? likes,
       required int? views,
       required int? downloads}) {
     return _PhotoDetails(
@@ -46,6 +47,7 @@ class _$PhotoDetailsTearOff {
       links: links,
       exif: exif,
       user: user,
+      likes: likes,
       views: views,
       downloads: downloads,
     );
@@ -72,6 +74,7 @@ mixin _$PhotoDetails {
   PhotoLinks? get links => throw _privateConstructorUsedError;
   Exif? get exif => throw _privateConstructorUsedError;
   User? get user => throw _privateConstructorUsedError;
+  int? get likes => throw _privateConstructorUsedError;
   int? get views => throw _privateConstructorUsedError;
   int? get downloads => throw _privateConstructorUsedError;
 
@@ -98,6 +101,7 @@ abstract class $PhotoDetailsCopyWith<$Res> {
       PhotoLinks? links,
       Exif? exif,
       User? user,
+      int? likes,
       int? views,
       int? downloads});
 
@@ -128,6 +132,7 @@ class _$PhotoDetailsCopyWithImpl<$Res> implements $PhotoDetailsCopyWith<$Res> {
     Object? links = freezed,
     Object? exif = freezed,
     Object? user = freezed,
+    Object? likes = freezed,
     Object? views = freezed,
     Object? downloads = freezed,
   }) {
@@ -176,6 +181,10 @@ class _$PhotoDetailsCopyWithImpl<$Res> implements $PhotoDetailsCopyWith<$Res> {
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      likes: likes == freezed
+          ? _value.likes
+          : likes // ignore: cast_nullable_to_non_nullable
+              as int?,
       views: views == freezed
           ? _value.views
           : views // ignore: cast_nullable_to_non_nullable
@@ -251,6 +260,7 @@ abstract class _$PhotoDetailsCopyWith<$Res>
       PhotoLinks? links,
       Exif? exif,
       User? user,
+      int? likes,
       int? views,
       int? downloads});
 
@@ -287,6 +297,7 @@ class __$PhotoDetailsCopyWithImpl<$Res> extends _$PhotoDetailsCopyWithImpl<$Res>
     Object? links = freezed,
     Object? exif = freezed,
     Object? user = freezed,
+    Object? likes = freezed,
     Object? views = freezed,
     Object? downloads = freezed,
   }) {
@@ -335,6 +346,10 @@ class __$PhotoDetailsCopyWithImpl<$Res> extends _$PhotoDetailsCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      likes: likes == freezed
+          ? _value.likes
+          : likes // ignore: cast_nullable_to_non_nullable
+              as int?,
       views: views == freezed
           ? _value.views
           : views // ignore: cast_nullable_to_non_nullable
@@ -363,6 +378,7 @@ class _$_PhotoDetails implements _PhotoDetails {
       required this.links,
       required this.exif,
       required this.user,
+      required this.likes,
       required this.views,
       required this.downloads});
 
@@ -392,13 +408,15 @@ class _$_PhotoDetails implements _PhotoDetails {
   @override
   final User? user;
   @override
+  final int? likes;
+  @override
   final int? views;
   @override
   final int? downloads;
 
   @override
   String toString() {
-    return 'PhotoDetails(id: $id, created_at: $created_at, updated_at: $updated_at, width: $width, height: $height, color: $color, blur_hash: $blur_hash, urls: $urls, links: $links, exif: $exif, user: $user, views: $views, downloads: $downloads)';
+    return 'PhotoDetails(id: $id, created_at: $created_at, updated_at: $updated_at, width: $width, height: $height, color: $color, blur_hash: $blur_hash, urls: $urls, links: $links, exif: $exif, user: $user, likes: $likes, views: $views, downloads: $downloads)';
   }
 
   @override
@@ -430,6 +448,8 @@ class _$_PhotoDetails implements _PhotoDetails {
                 const DeepCollectionEquality().equals(other.exif, exif)) &&
             (identical(other.user, user) ||
                 const DeepCollectionEquality().equals(other.user, user)) &&
+            (identical(other.likes, likes) ||
+                const DeepCollectionEquality().equals(other.likes, likes)) &&
             (identical(other.views, views) ||
                 const DeepCollectionEquality().equals(other.views, views)) &&
             (identical(other.downloads, downloads) ||
@@ -451,6 +471,7 @@ class _$_PhotoDetails implements _PhotoDetails {
       const DeepCollectionEquality().hash(links) ^
       const DeepCollectionEquality().hash(exif) ^
       const DeepCollectionEquality().hash(user) ^
+      const DeepCollectionEquality().hash(likes) ^
       const DeepCollectionEquality().hash(views) ^
       const DeepCollectionEquality().hash(downloads);
 
@@ -478,6 +499,7 @@ abstract class _PhotoDetails implements PhotoDetails {
       required PhotoLinks? links,
       required Exif? exif,
       required User? user,
+      required int? likes,
       required int? views,
       required int? downloads}) = _$_PhotoDetails;
 
@@ -506,6 +528,8 @@ abstract class _PhotoDetails implements PhotoDetails {
   Exif? get exif => throw _privateConstructorUsedError;
   @override
   User? get user => throw _privateConstructorUsedError;
+  @override
+  int? get likes => throw _privateConstructorUsedError;
   @override
   int? get views => throw _privateConstructorUsedError;
   @override

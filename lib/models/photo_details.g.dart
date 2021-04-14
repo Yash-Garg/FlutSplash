@@ -31,6 +31,7 @@ _$_PhotoDetails _$_$_PhotoDetailsFromJson(Map<String, dynamic> json) {
     user: json['user'] == null
         ? null
         : User.fromJson(json['user'] as Map<String, dynamic>),
+    likes: json['likes'] as int?,
     views: json['views'] as int?,
     downloads: json['downloads'] as int?,
   );
@@ -49,6 +50,7 @@ Map<String, dynamic> _$_$_PhotoDetailsToJson(_$_PhotoDetails instance) =>
       'links': instance.links,
       'exif': instance.exif,
       'user': instance.user,
+      'likes': instance.likes,
       'views': instance.views,
       'downloads': instance.downloads,
     };

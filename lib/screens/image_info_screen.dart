@@ -5,6 +5,7 @@ import 'package:flutsplash/helpers/download_manager.dart';
 import 'package:flutsplash/helpers/keys.dart';
 import 'package:flutsplash/helpers/path_manager.dart';
 import 'package:flutsplash/helpers/permission_manager.dart';
+import 'package:flutsplash/models/photo_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:open_file/open_file.dart';
@@ -27,27 +28,27 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
   Widget build(BuildContext context) {
     Dio dio = new Dio();
     String accessKey = Keys.UNSPLASH_API_CLIENT_ID;
-    var data = widget.imageDetails;
+    PhotoDetails data = PhotoDetails.fromJson(widget.imageDetails);
 
     // EXIF Data
-    var cameraModel = data['exif']['model'] ?? "Unknown";
-    var exposureTime = data['exif']['exposure_time'] ?? "Unknown ";
-    var aperture = data['exif']['aperture'] ?? "Unknown ";
-    var focalLength = data['exif']['focal_length'] ?? "Unknown ";
-    var iso = data['exif']['iso'] ?? "Unknown ";
+    var cameraModel = data.exif!.model ?? "Unknown";
+    var exposureTime = data.exif!.exposure_time ?? "Unknown ";
+    var aperture = data.exif!.aperture ?? "Unknown ";
+    var focalLength = data.exif!.focal_length ?? "Unknown ";
+    var iso = data.exif!.iso ?? "Unknown ";
 
-    var webURL = data['links']['html'];
-    var imgURL = data['urls']['small'];
-    var rawImgURL = data['urls']['raw'];
-    var imgID = data['id'];
-    var imgCreator = data['user']['name'];
-    var downloadEndpoint = data['links']['download_location'];
-    var creatorPic = data['user']['profile_image']['medium'];
-    var imageHeight = data['height'];
-    var imageWidth = data['width'];
-    var likes = data['likes'];
-    var views = data['views'];
-    var downloads = data['downloads'];
+    var webURL = data.links!.html;
+    var imgURL = data.urls!.small;
+    var rawImgURL = data.urls!.raw;
+    var imgID = data.id;
+    var imgCreator = data.user!.name;
+    var downloadEndpoint = data.links!.download_location;
+    var creatorPic = data.user!.profile_image.medium;
+    var imageHeight = data.height;
+    var imageWidth = data.width;
+    var likes = data.likes;
+    var views = data.views;
+    var downloads = data.downloads;
 
     Future checkImage(String id) async {
       String imagePath = await getPath("$id.jpeg");

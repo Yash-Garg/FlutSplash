@@ -20,6 +20,7 @@ class PhotoDetails with _$PhotoDetails {
     required PhotoLinks? links,
     required Exif? exif,
     required User? user,
+    required int? likes,
     required int? views,
     required int? downloads,
   }) = _PhotoDetails;
