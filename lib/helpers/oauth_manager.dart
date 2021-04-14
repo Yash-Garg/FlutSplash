@@ -1,10 +1,15 @@
+import 'package:dio/dio.dart';
 import 'package:flutsplash/helpers/keys.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-String redirectURI = "urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob";
+Dio dio = new Dio();
+String redirectURI = Keys.REDIRECT_URI;
 String accessKey = Keys.UNSPLASH_API_CLIENT_ID;
-String scopes =
-    "public+read_user+write_user+read_photos+write_photos+write_likes+write_followers+read_collections+write_collections";
+String scopes = Keys.SCOPES;
+String authType = "authorization_code";
+String secretKey = Keys.UNSPLASH_API_SECRET_ID;
+String accessKeyURL =
+    "https://unsplash.com/oauth/token?client_id=$accessKey&client_secret=$secretKey&redirect_uri=$redirectURI&grant_type=$authType&code=";
 String AUTH_CODE_URL =
     "https://unsplash.com/oauth/authorize?client_id=$accessKey&redirect_uri=$redirectURI&response_type=code&scope=$scopes";
 
@@ -34,4 +39,11 @@ getAuthCode() async {
       android: AndroidChromeCustomTabsOptions(addDefaultShareMenuItem: false),
     ),
   );
+}
+
+getBearerData(String authKey) async {
+  var finalURL = accessKeyURL + authKey;
+  var response = await dio.get("$finalURL");
+  Map<String, dynamic> bearerData = response.data;
+  return bearerData;
 }

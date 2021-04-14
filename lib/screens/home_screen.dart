@@ -1,6 +1,5 @@
 import 'package:flutsplash/main.dart';
 import 'package:flutsplash/screens/collection_screen.dart';
-import 'package:flutsplash/screens/login_screen.dart';
 import 'package:flutsplash/screens/photos_screen.dart';
 import 'package:flutsplash/screens/search_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,7 @@ class HomePage extends StatefulWidget {
 final tabs = ["HOME", "COLLECTIONS"];
 
 class _HomePageState extends State<HomePage> {
-  late bool isLoggedIN = false;
+  bool isLoggedIN = false;
   TextEditingController textController = new TextEditingController();
   @override
   void dispose() {
@@ -109,11 +108,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.black54,
                   ),
                 ),
-                onTap: () async {
-                  showDialog(
-                      context: context,
-                      builder: (context) => authDialog(textController));
-                },
+                onTap: () {},
               ),
               ListTile(
                 leading: FaIcon(
