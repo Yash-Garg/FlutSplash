@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
             shrinkWrap: true,
             children: <Widget>[
               Container(
-                height: MediaQuery.of(context).size.height * 0.2,
+                height: 150,
                 child: isLoggedIN
                     ? Padding(
                         padding: const EdgeInsets.all(16.0),
