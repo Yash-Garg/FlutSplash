@@ -125,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 onTap: () {
-                  openCustomTab(
+                  launch(
                       "https://play.google.com/store/apps/details?id=com.yashgarg.flutsplash");
                 },
               ),
