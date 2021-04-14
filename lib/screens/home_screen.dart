@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget {
 final tabs = ["HOME", "COLLECTIONS"];
 
 class _HomePageState extends State<HomePage> {
+  late bool isLoggedIN = false;
   TextEditingController textController = new TextEditingController();
   @override
   void dispose() {
@@ -56,38 +57,49 @@ class _HomePageState extends State<HomePage> {
       );
 
   Widget _buildDrawer() => new Drawer(
-        child: Container(
-          height: double.infinity,
-          width: double.infinity,
+        child: Material(
           color: accentClr,
           child: ListView(
             shrinkWrap: true,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      radius: 25,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        'FlutSplash',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.2,
+                child: isLoggedIN
+                    ? Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            CircleAvatar(
+                              radius: 30,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text(
+                                'FlutSplash',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Image.asset(
+                        'images/header.png',
+                        fit: BoxFit.cover,
                       ),
-                    ),
-                  ],
-                ),
               ),
               Divider(
                 height: 1,
                 thickness: 1,
               ),
               ListTile(
-                leading: Icon(Icons.login),
+                leading: FaIcon(
+                  FontAwesomeIcons.solidUserCircle,
+                  size: 25,
+                ),
                 title: Text(
                   "Login",
                   style: TextStyle(
@@ -103,7 +115,10 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.star_half),
+                leading: FaIcon(
+                  FontAwesomeIcons.solidStar,
+                  size: 22,
+                ),
                 title: Text(
                   "Rate This App",
                   style: TextStyle(
@@ -118,7 +133,10 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.privacy_tip),
+                leading: Icon(
+                  Icons.privacy_tip,
+                  size: 25,
+                ),
                 title: Text(
                   "Privacy Policy",
                   style: TextStyle(
@@ -133,7 +151,10 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.mail),
+                leading: Icon(
+                  Icons.mail,
+                  size: 25,
+                ),
                 title: Text(
                   "Contact",
                   style: TextStyle(
