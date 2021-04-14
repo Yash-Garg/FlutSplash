@@ -95,6 +95,7 @@ class _HomePageState extends State<HomePage> {
                 height: 1,
                 thickness: 1,
               ),
+              Padding(padding: EdgeInsets.only(top: 15)),
               ListTile(
                 leading: FaIcon(
                   FontAwesomeIcons.solidUserCircle,
