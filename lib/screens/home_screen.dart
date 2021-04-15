@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -153,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                   size: 25,
                 ),
                 title: Text(
-                  "Contact",
+                  "Contact Us",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -163,6 +164,39 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {
                   launch("mailto:yashgarg.dev@gmail.com");
                 },
+              ),
+              ListTile(
+                leading: FaIcon(
+                  FontAwesomeIcons.shareAlt,
+                  size: 25,
+                ),
+                title: Text(
+                  "Share Flutsplash",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
+                ),
+                onTap: () {
+                  Share.share(
+                      "Check out FlutSplash! Your new favourite wallpaper app - https://play.google.com/store/apps/details?id=com.yashgarg.flutsplash");
+                },
+              ),
+              ListTile(
+                leading: FaIcon(
+                  FontAwesomeIcons.code,
+                  size: 25,
+                ),
+                title: Text(
+                  "Version (v1.5.0)",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
+                ),
+                onTap: null,
               ),
             ],
           ),
