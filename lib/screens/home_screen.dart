@@ -1,7 +1,6 @@
 import 'package:flutsplash/helpers/chrome_custom_tabs.dart';
 import 'package:flutsplash/main.dart';
 import 'package:flutsplash/screens/collection_screen.dart';
-import 'package:flutsplash/screens/login_webview_screen.dart';
 import 'package:flutsplash/screens/photos_screen.dart';
 import 'package:flutsplash/screens/search_screen.dart';
 import 'package:flutter/material.dart';
@@ -97,23 +96,21 @@ class _HomePageState extends State<HomePage> {
                 thickness: 1,
               ),
               Padding(padding: EdgeInsets.only(top: 15)),
-              ListTile(
-                leading: FaIcon(
-                  FontAwesomeIcons.solidUserCircle,
-                  size: 25,
-                ),
-                title: Text(
-                  "Login",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54,
-                  ),
-                ),
-                onTap: () {
-                  Get.to(() => LoginWebview());
-                },
-              ),
+              // ListTile(
+              //   leading: FaIcon(
+              //     FontAwesomeIcons.solidUserCircle,
+              //     size: 25,
+              //   ),
+              //   title: Text(
+              //     "Login",
+              //     style: TextStyle(
+              //       fontSize: 16,
+              //       fontWeight: FontWeight.bold,
+              //       color: Colors.black54,
+              //     ),
+              //   ),
+              //   onTap: () {},
+              // ),
               ListTile(
                 leading: FaIcon(
                   FontAwesomeIcons.solidStar,
