@@ -90,7 +90,7 @@ class _LatestPhotosState extends State<LatestPhotos>
                                   Map<String, dynamic> imgDetails =
                                       await _getImageDetails("$imgID");
                                   Get.to(
-                                    ImageInfoScreen(
+                                    () => ImageInfoScreen(
                                       imageDetails: imgDetails,
                                     ),
                                     transition: Transition.cupertinoDialog,

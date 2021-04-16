@@ -96,7 +96,7 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
                 ),
               ),
               onTap: () {
-                Get.to(FullScreenImage(imageURL: rawImgURL));
+                Get.to(() => FullScreenImage(imageURL: rawImgURL));
               },
             ),
             Wrap(

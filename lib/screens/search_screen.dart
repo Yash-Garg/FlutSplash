@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutsplash/helpers/keys.dart';
 import 'package:flutsplash/main.dart';
+import 'package:flutsplash/screens/image_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -129,6 +131,13 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget _buildSearchResultList() {
     var data = searchResults["results"];
 
+    Future _getSearchResultDetail(String imageID) async {
+      var response = await dio
+          .get("https://api.unsplash.com/photos/$imageID?client_id=$accessKey");
+      Map<String, dynamic> imageData = response.data;
+      return imageData;
+    }
+
     return Container(
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -137,16 +146,29 @@ class _SearchScreenState extends State<SearchScreen> {
                 physics: ScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
+                    child: InkWell(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image:
+                                NetworkImage("${data[index]['urls']['small']}"),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                      onTap: () async {
+                        String imgID = data[index]['id'];
+                        var resultDetails = await _getSearchResultDetail(imgID);
+                        Get.to(
+                          () => ImageInfoScreen(imageDetails: resultDetails),
+                          transition: Transition.cupertinoDialog,
+                        );
+                      },
+                    ),
                     height: MediaQuery.of(context).size.height * 0.75,
                     width: MediaQuery.of(context).size.width * 0.50,
                     margin: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage("${data[index]['urls']['small']}"),
-                        fit: BoxFit.cover,
-                      ),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
                   );
                 },
                 staggeredTileBuilder: (int index) =>

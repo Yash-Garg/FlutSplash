@@ -33,8 +33,8 @@ class _HomePageState extends State<HomePage> {
           disabledColor: Colors.white,
           alignment: Alignment.center,
         ),
-        onPressed: () =>
-            Get.to(SearchScreen(), transition: Transition.cupertinoDialog),
+        onPressed: () => Get.to(() => SearchScreen(),
+            transition: Transition.cupertinoDialog),
       );
 
   TabBar _buildTabBar() => new TabBar(
@@ -97,21 +97,6 @@ class _HomePageState extends State<HomePage> {
                 thickness: 1,
               ),
               Padding(padding: EdgeInsets.only(top: 15)),
-              // ListTile(
-              //   leading: FaIcon(
-              //     FontAwesomeIcons.solidUserCircle,
-              //     size: 25,
-              //   ),
-              //   title: Text(
-              //     "Login",
-              //     style: TextStyle(
-              //       fontSize: 16,
-              //       fontWeight: FontWeight.bold,
-              //       color: Colors.black54,
-              //     ),
-              //   ),
-              //   onTap: () {},
-              // ),
               ListTile(
                 leading: FaIcon(
                   FontAwesomeIcons.solidStar,
