@@ -44,72 +44,71 @@ class _CollectionPhotosState extends State<CollectionPhotos> {
   Widget build(BuildContext context) {
     var photosList = widget.photos;
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            '${widget.coll}',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+      appBar: AppBar(
+        title: Text(
+          '${widget.coll}',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.open_in_new_rounded),
+            onPressed: () {
+              openCustomTab(
+                  'https://unsplash.com/collections/${widget.collectionID}');
+            },
+          )
+        ],
+        iconTheme: IconThemeData(color: Colors.black),
+      ),
+      body: Container(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: StaggeredGridView.countBuilder(
+              physics: ScrollPhysics(),
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  child: InkWell(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image:
+                              NetworkImage("${photosList[index].urls.small}"),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                    onTap: () async {
+                      String imgID = photosList[index].id!;
+                      var resultDetails = await _getCollResultDetail(imgID);
+                      Get.to(
+                        () => ImageInfoScreen(imageDetails: resultDetails),
+                        transition: Transition.cupertinoDialog,
+                      );
+                    },
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.75,
+                  width: MediaQuery.of(context).size.width * 0.50,
+                  margin: EdgeInsets.all(8),
+                );
+              },
+              staggeredTileBuilder: (int index) =>
+                  new StaggeredTile.count(2, index.isEven ? 3 : 1.5),
+              shrinkWrap: true,
+              itemCount: photosList.length,
+              mainAxisSpacing: 1,
+              crossAxisSpacing: 1,
+              crossAxisCount: 4,
             ),
           ),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.open_in_new_rounded),
-              onPressed: () {
-                openCustomTab(
-                    'https://unsplash.com/collections/${widget.collectionID}');
-              },
-            )
-          ],
-          iconTheme: IconThemeData(color: Colors.black),
         ),
-        body: Wrap(
-          children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: StaggeredGridView.countBuilder(
-                  physics: ScrollPhysics(),
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      child: InkWell(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                  "${photosList[index].urls.small}"),
-                              fit: BoxFit.cover,
-                            ),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ),
-                        onTap: () async {
-                          String imgID = photosList[index].id!;
-                          var resultDetails = await _getCollResultDetail(imgID);
-                          Get.to(
-                            () => ImageInfoScreen(imageDetails: resultDetails),
-                            transition: Transition.cupertinoDialog,
-                          );
-                        },
-                      ),
-                      height: MediaQuery.of(context).size.height * 0.75,
-                      width: MediaQuery.of(context).size.width * 0.50,
-                      margin: EdgeInsets.all(8),
-                    );
-                  },
-                  staggeredTileBuilder: (int index) =>
-                      new StaggeredTile.count(2, index.isEven ? 3 : 1.5),
-                  shrinkWrap: true,
-                  itemCount: photosList.length,
-                  mainAxisSpacing: 1,
-                  crossAxisSpacing: 1,
-                  crossAxisCount: 4,
-                ),
-              ),
-            ),
-          ],
-        ));
+      ),
+    );
   }
 }
