@@ -99,184 +99,180 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
                 Get.to(() => FullScreenImage(imageURL: rawImgURL));
               },
             ),
-            Wrap(
+            Column(
               children: [
-                Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(20, 15, 20, 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                backgroundImage: NetworkImage("$creatorPic"),
-                                radius: 20,
-                              ),
-                              Padding(padding: EdgeInsets.only(left: 10)),
-                              Text(
+                Padding(
+                  padding: EdgeInsets.fromLTRB(20, 15, 20, 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              backgroundImage: NetworkImage("$creatorPic"),
+                              radius: 20,
+                            ),
+                            Padding(padding: EdgeInsets.only(left: 10)),
+                            Expanded(
+                              child: Text(
                                 "$imgCreator",
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.download_outlined,
+                              size: 25,
+                            ),
+                            onPressed: () async {
+                              var status = await requestPermissions();
+                              var downloadPath = await getPath("$imgID.jpeg");
+                              if (status == true) {
+                                await dio.get(
+                                    "$downloadEndpoint&client_id=$accessKey");
+                                await downloadFile(
+                                    rawImgURL, downloadPath, context);
+                              }
+                            },
                           ),
-                          Row(
-                            children: [
-                              IconButton(
-                                icon: Icon(
-                                  Icons.download_outlined,
-                                  size: 25,
-                                ),
-                                onPressed: () async {
-                                  var status = await requestPermissions();
-                                  var downloadPath =
-                                      await getPath("$imgID.jpeg");
-                                  if (status == true) {
-                                    await dio.get(
-                                        "$downloadEndpoint&client_id=$accessKey");
-                                    await downloadFile(
-                                        rawImgURL, downloadPath, context);
-                                  }
-                                },
-                              ),
-                              IconButton(
-                                icon: Icon(
-                                  Icons.favorite_border,
-                                  size: 25,
-                                ),
-                                onPressed: () {},
-                              ),
-                            ],
-                          )
+                          IconButton(
+                            icon: Icon(
+                              Icons.favorite_border,
+                              size: 25,
+                            ),
+                            onPressed: () {},
+                          ),
                         ],
+                      )
+                    ],
+                  ),
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                        child: Divider(
+                          color: Colors.black,
+                        ),
                       ),
                     ),
+                  ],
+                ),
+                Column(
+                  children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                            child: Divider(
-                              color: Colors.black,
-                            ),
+                          child: ListTile(
+                            title: Center(child: Text("Camera")),
+                            subtitle: Center(child: Text("$cameraModel")),
+                          ),
+                        ),
+                        Expanded(
+                          child: ListTile(
+                            title: Center(child: Text("Aperture")),
+                            subtitle: Center(child: Text("f/$aperture")),
                           ),
                         ),
                       ],
                     ),
-                    Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                title: Center(child: Text("Camera")),
-                                subtitle: Center(child: Text("$cameraModel")),
-                              ),
-                            ),
-                            Expanded(
-                              child: ListTile(
-                                title: Center(child: Text("Aperture")),
-                                subtitle: Center(child: Text("f/$aperture")),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                title: Center(child: Text("Focal Length")),
-                                subtitle:
-                                    Center(child: Text("${focalLength}mm")),
-                              ),
-                            ),
-                            Expanded(
-                              child: ListTile(
-                                title: Center(child: Text("Shutter Speed")),
-                                subtitle:
-                                    Center(child: Text("${exposureTime}s")),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                title: Center(child: Text("ISO")),
-                                subtitle:
-                                    Center(child: Text("${iso.toString()}")),
-                              ),
-                            ),
-                            Expanded(
-                              child: ListTile(
-                                title: Center(child: Text("Dimensions")),
-                                subtitle: Center(
-                                    child: Text(
-                                        "${imageWidth.toString()} x ${imageHeight.toString()}")),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                            child: Divider(
-                              color: Colors.black,
-                            ),
+                          child: ListTile(
+                            title: Center(child: Text("Focal Length")),
+                            subtitle: Center(child: Text("${focalLength}mm")),
+                          ),
+                        ),
+                        Expanded(
+                          child: ListTile(
+                            title: Center(child: Text("Shutter Speed")),
+                            subtitle: Center(child: Text("${exposureTime}s")),
                           ),
                         ),
                       ],
                     ),
-                    Column(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                title: Center(child: Text("Views")),
-                                subtitle: Center(child: Text("$views")),
-                              ),
-                            ),
-                            Expanded(
-                              child: ListTile(
-                                title: Center(child: Text("Downloads")),
-                                subtitle: Center(child: Text("$downloads")),
-                              ),
-                            ),
-                            Expanded(
-                              child: ListTile(
-                                title: Center(child: Text("Likes")),
-                                subtitle: Center(child: Text("$likes")),
-                              ),
-                            )
-                          ],
+                        Expanded(
+                          child: ListTile(
+                            title: Center(child: Text("ISO")),
+                            subtitle: Center(child: Text("${iso.toString()}")),
+                          ),
+                        ),
+                        Expanded(
+                          child: ListTile(
+                            title: Center(child: Text("Dimensions")),
+                            subtitle: Center(
+                                child: Text(
+                                    "${imageWidth.toString()} x ${imageHeight.toString()}")),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                        child: Divider(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: ListTile(
+                            title: Center(child: Text("Views")),
+                            subtitle: Center(child: Text("$views")),
+                          ),
+                        ),
+                        Expanded(
+                          child: ListTile(
+                            title: Center(child: Text("Downloads")),
+                            subtitle: Center(child: Text("$downloads")),
+                          ),
+                        ),
+                        Expanded(
+                          child: ListTile(
+                            title: Center(child: Text("Likes")),
+                            subtitle: Center(child: Text("$likes")),
+                          ),
                         )
                       ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                            child: Divider(
-                              color: Colors.black,
-                            ),
-                          ),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                        child: Divider(
+                          color: Colors.black,
                         ),
-                      ],
+                      ),
                     ),
                   ],
                 ),

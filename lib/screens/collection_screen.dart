@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:flutsplash/helpers/chrome_custom_tabs.dart';
+import 'package:flutsplash/screens/collection_photos_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutsplash/helpers/keys.dart';
 import 'package:flutsplash/models/collection.dart';
 import 'package:flutsplash/screens/card_shimmer.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:get/get.dart';
 
 class LatestCollections extends StatefulWidget {
   @override
@@ -34,6 +36,13 @@ class _LatestCollectionsState extends State<LatestCollections>
     setState(() {
       collections = Future.value(data);
     });
+  }
+
+  Future<List<PreviewPhoto>> _fetchCollectionPhotos(String collectionID) async {
+    var response = await dio.get(
+        "https://api.unsplash.com/collections/$collectionID/photos?client_id=$accessKey&per_page=50");
+    List<dynamic> collData = response.data;
+    return collData.map((d) => PreviewPhoto.fromJson(d)).toList();
   }
 
   Future<List<Collection>> _getCollections() async {
@@ -67,7 +76,7 @@ class _LatestCollectionsState extends State<LatestCollections>
                   var collCreatorImage = coll.user.profile_image.medium;
 
                   return Padding(
-                    padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+                    padding: EdgeInsets.fromLTRB(20, 15, 20, 5),
                     child: Card(
                       elevation: 3,
                       clipBehavior: Clip.antiAlias,
@@ -90,7 +99,16 @@ class _LatestCollectionsState extends State<LatestCollections>
                                       color: Colors.black38,
                                       colorBlendMode: BlendMode.multiply,
                                     ),
-                                    onTap: () {},
+                                    onTap: () async {
+                                      List<PreviewPhoto> photosList =
+                                          await _fetchCollectionPhotos(coll.id);
+                                      Get.to(() => CollectionPhotos(
+                                            photos: photosList,
+                                            collectionID: coll.id,
+                                            userName: collCreator,
+                                            coll: collectionTitle,
+                                          ));
+                                    },
                                   ),
                                 ),
                                 Padding(
@@ -130,7 +148,7 @@ class _LatestCollectionsState extends State<LatestCollections>
                                 ),
                               ),
                               onTap: () {
-                                launch("$collCreatorProfile");
+                                openCustomTab("$collCreatorProfile");
                               },
                             ),
                           ],
