@@ -9,6 +9,7 @@ import 'package:flutsplash/models/photo_details.dart';
 import 'package:flutsplash/screens/fullscreen_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
 import 'package:share/share.dart';
@@ -141,6 +142,15 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
                                     "$downloadEndpoint&client_id=$accessKey");
                                 await downloadFile(
                                     rawImgURL, downloadPath, context);
+                                Fluttertoast.showToast(
+                                  msg: "Downloaded $imgID.jpeg",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor:
+                                      Colors.black.withOpacity(0.4),
+                                  textColor: Colors.white,
+                                  fontSize: 16.0,
+                                );
                               }
                             },
                           ),
@@ -304,6 +314,14 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
           } else if (status == true) {
             await dio.get("$downloadEndpoint&client_id=$accessKey");
             await downloadFile(rawImgURL, filePath, context);
+            Fluttertoast.showToast(
+              msg: "Downloaded $imgID.jpeg",
+              toastLength: Toast.LENGTH_LONG,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.black.withOpacity(0.4),
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
             OpenFile.open("$filePath");
           }
         },
