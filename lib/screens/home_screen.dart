@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:package_info/package_info.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -20,6 +21,27 @@ final tabs = ["HOME", "COLLECTIONS"];
 class _HomePageState extends State<HomePage> {
   bool isLoggedIN = false;
   TextEditingController textController = new TextEditingController();
+
+  PackageInfo packageInfo = PackageInfo(
+    appName: 'Unknown',
+    packageName: 'Unknown',
+    version: 'Unknown',
+    buildNumber: 'Unknown',
+  );
+
+  initPackageInfo() async {
+    final PackageInfo info = await PackageInfo.fromPlatform();
+    setState(() {
+      packageInfo = info;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initPackageInfo();
+  }
+
   @override
   void dispose() {
     textController.dispose();
@@ -174,7 +196,7 @@ class _HomePageState extends State<HomePage> {
                   size: 25,
                 ),
                 title: Text(
-                  "Version (v1.5.0)",
+                  "Version (v${packageInfo.version})",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
