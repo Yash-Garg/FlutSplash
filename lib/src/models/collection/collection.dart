@@ -1,7 +1,8 @@
-import 'package:flutsplash/models/photo.dart';
-import 'package:flutsplash/models/urls.dart';
-import 'package:flutsplash/models/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../photo/photo.dart';
+import '../urls/urls.dart';
+import '../user/user.dart';
 
 part 'collection.freezed.dart';
 part 'collection.g.dart';

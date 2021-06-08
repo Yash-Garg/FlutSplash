@@ -1,20 +1,20 @@
 import 'package:dio/dio.dart';
-import 'package:flutsplash/helpers/chrome_custom_tabs.dart';
-import 'package:flutsplash/screens/collection_photos_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutsplash/helpers/keys.dart';
-import 'package:flutsplash/models/collection.dart';
-import 'package:flutsplash/screens/card_shimmer.dart';
 import 'package:get/get.dart';
+
+import '../../helpers/chrome_custom_tabs.dart';
+import '../../helpers/keys.dart';
+import '../../models/collection/collection.dart';
+import '../shimmer_loading/card_shimmer.dart';
+import 'collection_photos_screen.dart';
 
 class LatestCollections extends StatefulWidget {
   @override
   _LatestCollectionsState createState() => _LatestCollectionsState();
 }
 
-String accessKey = Keys.UNSPLASH_API_CLIENT_ID;
 String collectionDataURL =
-    "https://api.unsplash.com/collections?client_id=$accessKey&per_page=10";
+    'https://api.unsplash.com/collections?client_id=$unsplashApiClientID&per_page=10';
 
 class _LatestCollectionsState extends State<LatestCollections>
     with AutomaticKeepAliveClientMixin<LatestCollections> {
@@ -22,7 +22,7 @@ class _LatestCollectionsState extends State<LatestCollections>
   bool get wantKeepAlive => true;
 
   late Future<List<Collection>> collections;
-  Dio dio = new Dio();
+  Dio dio = Dio();
 
   @override
   void initState() {
@@ -31,7 +31,7 @@ class _LatestCollectionsState extends State<LatestCollections>
   }
 
   Future<void> _pullToRefreshCollections() async {
-    List<Collection> data = await _getCollections();
+    var data = await _getCollections();
     await Future.delayed(Duration(seconds: 1));
     setState(() {
       collections = Future.value(data);
@@ -40,7 +40,7 @@ class _LatestCollectionsState extends State<LatestCollections>
 
   Future<List<PreviewPhoto>> _fetchCollectionPhotos(String collectionID) async {
     var response = await dio.get(
-        "https://api.unsplash.com/collections/$collectionID/photos?client_id=$accessKey&per_page=50");
+        'https://api.unsplash.com/collections/$collectionID/photos?client_id=$unsplashApiClientID&per_page=50');
     List<dynamic> collData = response.data;
     return collData.map((d) => PreviewPhoto.fromJson(d)).toList();
   }
@@ -89,8 +89,18 @@ class _LatestCollectionsState extends State<LatestCollections>
                               children: [
                                 ClipRRect(
                                   child: InkWell(
+                                    onTap: () async {
+                                      var photosList =
+                                          await _fetchCollectionPhotos(coll.id);
+                                      await Get.to(() => CollectionPhotos(
+                                            photos: photosList,
+                                            collectionID: coll.id,
+                                            userName: collCreator,
+                                            coll: collectionTitle,
+                                          ));
+                                    },
                                     child: Image.network(
-                                      "$coverPhoto",
+                                      '$coverPhoto',
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.25,
@@ -99,22 +109,12 @@ class _LatestCollectionsState extends State<LatestCollections>
                                       color: Colors.black38,
                                       colorBlendMode: BlendMode.multiply,
                                     ),
-                                    onTap: () async {
-                                      List<PreviewPhoto> photosList =
-                                          await _fetchCollectionPhotos(coll.id);
-                                      Get.to(() => CollectionPhotos(
-                                            photos: photosList,
-                                            collectionID: coll.id,
-                                            userName: collCreator,
-                                            coll: collectionTitle,
-                                          ));
-                                    },
                                   ),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.all(15),
                                   child: Text(
-                                    "$collectionTitle\n$collTotalPhotos Photos",
+                                    '$collectionTitle\n$collTotalPhotos Photos',
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
@@ -125,15 +125,18 @@ class _LatestCollectionsState extends State<LatestCollections>
                               ],
                             ),
                             InkWell(
+                              onTap: () {
+                                openCustomTab('$collCreatorProfile');
+                              },
                               child: ListTile(
                                 leading: CircleAvatar(
                                   backgroundImage:
-                                      NetworkImage("$collCreatorImage"),
+                                      NetworkImage('$collCreatorImage'),
                                   radius: 25,
                                   backgroundColor: Colors.transparent,
                                 ),
                                 title: Text(
-                                  "$collCreator (@$collCreatorUsername)",
+                                  '$collCreator (@$collCreatorUsername)',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -147,9 +150,6 @@ class _LatestCollectionsState extends State<LatestCollections>
                                   ),
                                 ),
                               ),
-                              onTap: () {
-                                openCustomTab("$collCreatorProfile");
-                              },
                             ),
                           ],
                         ),

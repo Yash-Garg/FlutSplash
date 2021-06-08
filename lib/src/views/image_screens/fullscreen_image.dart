@@ -1,6 +1,7 @@
-import 'package:flutsplash/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../theme/app_theme.dart';
 
 class FullScreenImage extends StatelessWidget {
   final String imageURL;
@@ -9,6 +10,9 @@ class FullScreenImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () {
+        Get.back();
+      },
       child: Container(
         color: Colors.black.withOpacity(0.8),
         height: double.infinity,
@@ -26,9 +30,6 @@ class FullScreenImage extends StatelessWidget {
           },
         ),
       ),
-      onTap: () {
-        Get.back();
-      },
     );
   }
 }

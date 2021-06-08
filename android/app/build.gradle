@@ -43,8 +43,8 @@ android {
         applicationId "com.yashgarg.flutsplash"
         minSdkVersion 17
         targetSdkVersion 30
-        versionCode 8
-        versionName "v1.7.0"
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
         multiDexEnabled true
         ndk { debugSymbolLevel 'FULL' }
     }

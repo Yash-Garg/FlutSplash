@@ -1,5 +1,6 @@
-import 'package:flutsplash/models/photo.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../photo/photo.dart';
 
 part 'search.freezed.dart';
 part 'search.g.dart';

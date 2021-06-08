@@ -1,12 +1,6 @@
 import 'dart:io' as io;
+
 import 'package:dio/dio.dart';
-import 'package:flutsplash/helpers/chrome_custom_tabs.dart';
-import 'package:flutsplash/helpers/download_manager.dart';
-import 'package:flutsplash/helpers/keys.dart';
-import 'package:flutsplash/helpers/path_manager.dart';
-import 'package:flutsplash/helpers/permission_manager.dart';
-import 'package:flutsplash/models/photo_details.dart';
-import 'package:flutsplash/screens/fullscreen_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -14,11 +8,19 @@ import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
 import 'package:share/share.dart';
 
+import '../../helpers/chrome_custom_tabs.dart';
+import '../../helpers/download_manager.dart';
+import '../../helpers/keys.dart';
+import '../../helpers/path_manager.dart';
+import '../../helpers/permission_manager.dart';
+import '../../models/photo_details/photo_details.dart';
+import 'fullscreen_image.dart';
+
 class ImageInfoScreen extends StatefulWidget {
   final Map<String, dynamic> imageDetails;
 
   ImageInfoScreen({required Map<String, dynamic> imageDetails})
-      : this.imageDetails = imageDetails;
+      : imageDetails = imageDetails;
 
   @override
   _ImageInfoScreenState createState() => _ImageInfoScreenState(imageDetails);
@@ -29,16 +31,15 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Dio dio = new Dio();
-    String accessKey = Keys.UNSPLASH_API_CLIENT_ID;
-    PhotoDetails data = PhotoDetails.fromJson(widget.imageDetails);
+    var dio = Dio();
+    var data = PhotoDetails.fromJson(widget.imageDetails);
 
     // EXIF Data
-    var cameraModel = data.exif!.model ?? "Unknown";
-    var exposureTime = data.exif!.exposure_time ?? "Unknown ";
-    var aperture = data.exif!.aperture ?? "Unknown ";
-    var focalLength = data.exif!.focal_length ?? "Unknown ";
-    var iso = data.exif!.iso ?? "Unknown ";
+    var cameraModel = data.exif!.model ?? 'Unknown';
+    var exposureTime = data.exif!.exposure_time ?? 'Unknown ';
+    var aperture = data.exif!.aperture ?? 'Unknown ';
+    var focalLength = data.exif!.focal_length ?? 'Unknown ';
+    var iso = data.exif!.iso ?? 'Unknown ';
 
     var webURL = data.links!.html;
     var imgURL = data.urls!.small;
@@ -54,7 +55,7 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
     var downloads = data.downloads;
 
     Future checkImage(String id) async {
-      String imagePath = await getPath("$id.jpeg");
+      var imagePath = await getPath('$id.jpeg');
       var result = await io.File(imagePath).exists();
       return result;
     }
@@ -65,13 +66,13 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
           IconButton(
             icon: Icon(Icons.open_in_browser),
             onPressed: () {
-              openCustomTab("$webURL");
+              openCustomTab('$webURL');
             },
           ),
           IconButton(
             icon: Icon(Icons.share),
             onPressed: () {
-              Share.share("Photo by $imgCreator on Unsplash\n$webURL");
+              Share.share('Photo by $imgCreator on Unsplash\n$webURL');
             },
           )
         ],
@@ -86,6 +87,9 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
         child: Column(
           children: [
             InkWell(
+              onTap: () {
+                Get.to(() => FullScreenImage(imageURL: rawImgURL));
+              },
               child: ClipRRect(
                 child: Image.network(
                   imgURL,
@@ -96,9 +100,6 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
                   colorBlendMode: BlendMode.multiply,
                 ),
               ),
-              onTap: () {
-                Get.to(() => FullScreenImage(imageURL: rawImgURL));
-              },
             ),
             Column(
               children: [
@@ -111,13 +112,13 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
                         child: Row(
                           children: [
                             CircleAvatar(
-                              backgroundImage: NetworkImage("$creatorPic"),
+                              backgroundImage: NetworkImage('$creatorPic'),
                               radius: 20,
                             ),
                             Padding(padding: EdgeInsets.only(left: 10)),
                             Expanded(
                               child: Text(
-                                "$imgCreator",
+                                '$imgCreator',
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -136,14 +137,14 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
                             ),
                             onPressed: () async {
                               var status = await requestPermissions();
-                              var downloadPath = await getPath("$imgID.jpeg");
+                              var downloadPath = await getPath('$imgID.jpeg');
                               if (status == true) {
                                 await dio.get(
-                                    "$downloadEndpoint&client_id=$accessKey");
+                                    '$downloadEndpoint&client_id=$unsplashApiClientID');
                                 await downloadFile(
                                     rawImgURL, downloadPath, context);
-                                Fluttertoast.showToast(
-                                  msg: "Downloaded $imgID.jpeg",
+                                await Fluttertoast.showToast(
+                                  msg: 'Downloaded $imgID.jpeg',
                                   toastLength: Toast.LENGTH_LONG,
                                   timeInSecForIosWeb: 1,
                                   backgroundColor:
@@ -185,31 +186,14 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
                       children: [
                         Expanded(
                           child: ListTile(
-                            title: Center(child: Text("Camera")),
-                            subtitle: Center(child: Text("$cameraModel")),
+                            title: Center(child: Text('Camera')),
+                            subtitle: Center(child: Text('$cameraModel')),
                           ),
                         ),
                         Expanded(
                           child: ListTile(
-                            title: Center(child: Text("Aperture")),
-                            subtitle: Center(child: Text("f/$aperture")),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                          child: ListTile(
-                            title: Center(child: Text("Focal Length")),
-                            subtitle: Center(child: Text("${focalLength}mm")),
-                          ),
-                        ),
-                        Expanded(
-                          child: ListTile(
-                            title: Center(child: Text("Shutter Speed")),
-                            subtitle: Center(child: Text("${exposureTime}s")),
+                            title: Center(child: Text('Aperture')),
+                            subtitle: Center(child: Text('f/$aperture')),
                           ),
                         ),
                       ],
@@ -219,16 +203,33 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
                       children: [
                         Expanded(
                           child: ListTile(
-                            title: Center(child: Text("ISO")),
-                            subtitle: Center(child: Text("${iso.toString()}")),
+                            title: Center(child: Text('Focal Length')),
+                            subtitle: Center(child: Text('${focalLength}mm')),
                           ),
                         ),
                         Expanded(
                           child: ListTile(
-                            title: Center(child: Text("Dimensions")),
+                            title: Center(child: Text('Shutter Speed')),
+                            subtitle: Center(child: Text('${exposureTime}s')),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(
+                          child: ListTile(
+                            title: Center(child: Text('ISO')),
+                            subtitle: Center(child: Text('${iso.toString()}')),
+                          ),
+                        ),
+                        Expanded(
+                          child: ListTile(
+                            title: Center(child: Text('Dimensions')),
                             subtitle: Center(
                                 child: Text(
-                                    "${imageWidth.toString()} x ${imageHeight.toString()}")),
+                                    '${imageWidth.toString()} x ${imageHeight.toString()}')),
                           ),
                         ),
                       ],
@@ -254,20 +255,20 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
                       children: [
                         Expanded(
                           child: ListTile(
-                            title: Center(child: Text("Views")),
-                            subtitle: Center(child: Text("$views")),
+                            title: Center(child: Text('Views')),
+                            subtitle: Center(child: Text('$views')),
                           ),
                         ),
                         Expanded(
                           child: ListTile(
-                            title: Center(child: Text("Downloads")),
-                            subtitle: Center(child: Text("$downloads")),
+                            title: Center(child: Text('Downloads')),
+                            subtitle: Center(child: Text('$downloads')),
                           ),
                         ),
                         Expanded(
                           child: ListTile(
-                            title: Center(child: Text("Likes")),
-                            subtitle: Center(child: Text("$likes")),
+                            title: Center(child: Text('Likes')),
+                            subtitle: Center(child: Text('$likes')),
                           ),
                         )
                       ],
@@ -296,33 +297,33 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
           children: [
             Icon(Icons.wallpaper),
             Padding(
+              padding: EdgeInsets.only(left: 10),
               child: Text(
-                "OPEN IN GALLERY",
+                'OPEN IN GALLERY',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              padding: EdgeInsets.only(left: 10),
             ),
           ],
         ),
         onPressed: () async {
-          var imgExist = await checkImage("$imgID");
+          var imgExist = await checkImage('$imgID');
           var status = await requestPermissions();
-          String filePath = await getPath("$imgID.jpeg");
+          var filePath = await getPath('$imgID.jpeg');
           if (imgExist == true) {
             print(filePath);
-            OpenFile.open("$filePath");
+            await OpenFile.open('$filePath');
           } else if (status == true) {
-            await dio.get("$downloadEndpoint&client_id=$accessKey");
+            await dio.get('$downloadEndpoint&client_id=$unsplashApiClientID');
             await downloadFile(rawImgURL, filePath, context);
-            Fluttertoast.showToast(
-              msg: "Downloaded $imgID.jpeg",
+            await Fluttertoast.showToast(
+              msg: 'Downloaded $imgID.jpeg',
               toastLength: Toast.LENGTH_LONG,
               timeInSecForIosWeb: 1,
               backgroundColor: Colors.black.withOpacity(0.4),
               textColor: Colors.white,
               fontSize: 16.0,
             );
-            OpenFile.open("$filePath");
+            await OpenFile.open('$filePath');
           }
         },
       ),

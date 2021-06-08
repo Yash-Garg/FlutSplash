@@ -1,17 +1,18 @@
-import 'package:flutsplash/main.dart';
-import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 
-Future downloadFile(String url, String savePath, BuildContext ctx) async {
-  var dio = new Dio();
+import '../theme/app_theme.dart';
 
-  ProgressDialog pd = ProgressDialog(context: ctx);
+Future downloadFile(String url, String savePath, BuildContext ctx) async {
+  final dio = Dio();
+
+  final pd = ProgressDialog(context: ctx);
   pd.show(
     max: 100,
     msg: 'Downloading file...',
     progressType: ProgressType.valuable,
-    backgroundColor: Color(0xFF121212),
+    backgroundColor: const Color(0xFF121212),
     progressValueColor: accentClr,
     progressBgColor: Colors.white70,
     msgColor: Colors.white,
@@ -19,10 +20,10 @@ Future downloadFile(String url, String savePath, BuildContext ctx) async {
   );
 
   await dio.download(
-    "$url",
-    "$savePath",
+    url,
+    savePath,
     onReceiveProgress: (rec, total) {
-      int progress = (((rec / total) * 100).toInt());
+      final progress = ((rec / total) * 100).toInt();
       pd.update(value: progress);
     },
   );

@@ -1,8 +1,10 @@
 import 'dart:async';
-import 'package:flutsplash/main.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../theme/app_theme.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -38,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     children: [
                       Spacer(flex: 2),
                       Text(
-                        "FlutSplash",
+                        'FlutSplash',
                         style: TextStyle(
                           fontSize: 50,
                           fontWeight: FontWeight.w900,

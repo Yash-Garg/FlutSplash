@@ -1,8 +1,3 @@
-import 'package:flutsplash/helpers/chrome_custom_tabs.dart';
-import 'package:flutsplash/main.dart';
-import 'package:flutsplash/screens/collection_screen.dart';
-import 'package:flutsplash/screens/photos_screen.dart';
-import 'package:flutsplash/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -11,16 +6,22 @@ import 'package:package_info/package_info.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../helpers/chrome_custom_tabs.dart';
+import '../../theme/app_theme.dart';
+import '../collection_screens/collection_screen.dart';
+import '../photos_screen/photos_screen.dart';
+import '../search_screen/search_screen.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-final tabs = ["HOME", "COLLECTIONS"];
+final tabs = ['HOME', 'COLLECTIONS'];
 
 class _HomePageState extends State<HomePage> {
   bool isLoggedIN = false;
-  TextEditingController textController = new TextEditingController();
+  TextEditingController textController = TextEditingController();
 
   PackageInfo packageInfo = PackageInfo(
     appName: 'Unknown',
@@ -29,8 +30,8 @@ class _HomePageState extends State<HomePage> {
     buildNumber: 'Unknown',
   );
 
-  initPackageInfo() async {
-    final PackageInfo info = await PackageInfo.fromPlatform();
+  void initPackageInfo() async {
+    final info = await PackageInfo.fromPlatform();
     setState(() {
       packageInfo = info;
     });
@@ -48,18 +49,18 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
-  Widget _buildFab() => new FloatingActionButton(
+  Widget _buildFab() => FloatingActionButton(
+        onPressed: () => Get.to(() => SearchScreen(),
+            transition: Transition.cupertinoDialog),
         child: IconButton(
           icon: Icon(Icons.search),
           onPressed: null,
           disabledColor: Colors.white,
           alignment: Alignment.center,
         ),
-        onPressed: () => Get.to(() => SearchScreen(),
-            transition: Transition.cupertinoDialog),
       );
 
-  TabBar _buildTabBar() => new TabBar(
+  TabBar _buildTabBar() => TabBar(
         tabs: [
           for (final tab in tabs)
             Tab(
@@ -79,7 +80,7 @@ class _HomePageState extends State<HomePage> {
         ],
       );
 
-  Widget _buildDrawer() => new Drawer(
+  Widget _buildDrawer() => Drawer(
         child: Material(
           color: accentClr,
           child: ListView(
@@ -125,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                   size: 22,
                 ),
                 title: Text(
-                  "Rate This App",
+                  'Rate This App',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -134,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onTap: () {
                   launch(
-                      "https://play.google.com/store/apps/details?id=com.yashgarg.flutsplash");
+                      'https://play.google.com/store/apps/details?id=com.yashgarg.flutsplash');
                 },
               ),
               ListTile(
@@ -143,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                   size: 25,
                 ),
                 title: Text(
-                  "Privacy Policy",
+                  'Privacy Policy',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -152,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onTap: () {
                   openCustomTab(
-                      "https://gistpreview.github.io/?d183948f7bb24383f92688f66155d8b0/privacy-policy.html");
+                      'https://gistpreview.github.io/?d183948f7bb24383f92688f66155d8b0/privacy-policy.html');
                 },
               ),
               ListTile(
@@ -161,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                   size: 25,
                 ),
                 title: Text(
-                  "Contact Us",
+                  'Contact Us',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -169,7 +170,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 onTap: () {
-                  launch("mailto:yashgarg.dev@gmail.com");
+                  launch('mailto:yashgarg.dev@gmail.com');
                 },
               ),
               ListTile(
@@ -178,7 +179,7 @@ class _HomePageState extends State<HomePage> {
                   size: 25,
                 ),
                 title: Text(
-                  "Share Flutsplash",
+                  'Share Flutsplash',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -187,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onTap: () {
                   Share.share(
-                      "Check out FlutSplash! Your new favourite wallpaper app - https://play.google.com/store/apps/details?id=com.yashgarg.flutsplash");
+                      'Check out FlutSplash! Your new favourite wallpaper app - https://play.google.com/store/apps/details?id=com.yashgarg.flutsplash');
                 },
               ),
               ListTile(
@@ -196,7 +197,7 @@ class _HomePageState extends State<HomePage> {
                   size: 25,
                 ),
                 title: Text(
-                  "Version (v${packageInfo.version})",
+                  'Version (v${packageInfo.version})',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -218,7 +219,7 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: Center(
             child: Text(
-              "FlutSplash",
+              'FlutSplash',
               style: TextStyle(
                 fontSize: 24,
                 color: Colors.black,
@@ -233,7 +234,7 @@ class _HomePageState extends State<HomePage> {
               icon: FaIcon(FontAwesomeIcons.github, color: Colors.black),
               disabledColor: Colors.black,
               onPressed: () {
-                openCustomTab("https://github.com/Yash-Garg/FlutSplash");
+                openCustomTab('https://github.com/Yash-Garg/FlutSplash');
               },
             )
           ],

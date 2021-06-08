@@ -1,6 +1,7 @@
-import 'package:flutsplash/main.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../../theme/app_theme.dart';
 
 class ShimmerCards extends StatefulWidget {
   @override
@@ -11,6 +12,8 @@ class _ShimmerCardsState extends State<ShimmerCards> {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
+      baseColor: accentClr,
+      highlightColor: Colors.white54,
       child: ListView.builder(
         itemCount: 10,
         itemBuilder: (context, index) {
@@ -27,7 +30,7 @@ class _ShimmerCardsState extends State<ShimmerCards> {
                   ListTile(
                     leading: CircleAvatar(),
                     title: Text(
-                      "",
+                      '',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -36,7 +39,7 @@ class _ShimmerCardsState extends State<ShimmerCards> {
                     subtitle: Padding(
                       padding: EdgeInsets.only(top: 5),
                       child: Text(
-                        "",
+                        '',
                         style: TextStyle(fontSize: 15),
                       ),
                     ),
@@ -47,8 +50,6 @@ class _ShimmerCardsState extends State<ShimmerCards> {
           );
         },
       ),
-      baseColor: accentClr,
-      highlightColor: Colors.white54,
     );
   }
 }

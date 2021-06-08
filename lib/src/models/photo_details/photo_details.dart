@@ -1,7 +1,8 @@
-import 'package:flutsplash/models/links.dart';
-import 'package:flutsplash/models/urls.dart';
-import 'package:flutsplash/models/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../lniks/links.dart';
+import '../urls/urls.dart';
+import '../user/user.dart';
 
 part 'photo_details.freezed.dart';
 part 'photo_details.g.dart';

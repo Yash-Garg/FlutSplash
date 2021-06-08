@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
-import 'package:flutsplash/helpers/chrome_custom_tabs.dart';
-import 'package:flutsplash/models/collection.dart';
-import 'package:flutsplash/screens/collection_screen.dart';
-import 'package:flutsplash/screens/image_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+
+import '../../helpers/chrome_custom_tabs.dart';
+import '../../helpers/keys.dart';
+import '../../models/collection/collection.dart';
+import '../image_screens/image_info_screen.dart';
 
 class CollectionPhotos extends StatefulWidget {
   final List<PreviewPhoto> photos;
@@ -18,10 +19,10 @@ class CollectionPhotos extends StatefulWidget {
     required String collectionID,
     required String userName,
     required String coll,
-  })   : this.photos = photos,
-        this.collectionID = collectionID,
-        this.userName = userName,
-        this.coll = coll;
+  })  : photos = photos,
+        collectionID = collectionID,
+        userName = userName,
+        coll = coll;
 
   @override
   _CollectionPhotosState createState() =>
@@ -29,13 +30,13 @@ class CollectionPhotos extends StatefulWidget {
 }
 
 class _CollectionPhotosState extends State<CollectionPhotos> {
-  Dio dio = new Dio();
+  Dio dio = Dio();
   _CollectionPhotosState(List<PreviewPhoto> photos, String collectionID,
       String userName, String coll);
 
-  _getCollResultDetail(String imageID) async {
-    var response = await dio
-        .get("https://api.unsplash.com/photos/$imageID?client_id=$accessKey");
+  Future<Map<String, dynamic>> _getCollResultDetail(String imageID) async {
+    var response = await dio.get(
+        'https://api.unsplash.com/photos/$imageID?client_id=$unsplashApiClientID');
     Map<String, dynamic> imageData = response.data;
     return imageData;
   }
@@ -73,33 +74,33 @@ class _CollectionPhotosState extends State<CollectionPhotos> {
               physics: ScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
                 return Container(
+                  height: MediaQuery.of(context).size.height * 0.75,
+                  width: MediaQuery.of(context).size.width * 0.50,
+                  margin: EdgeInsets.all(8),
                   child: InkWell(
+                    onTap: () async {
+                      var imgID = photosList[index].id!;
+                      var resultDetails = await _getCollResultDetail(imgID);
+                      await Get.to(
+                        () => ImageInfoScreen(imageDetails: resultDetails),
+                        transition: Transition.cupertinoDialog,
+                      );
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image:
-                              NetworkImage("${photosList[index].urls.small}"),
+                              NetworkImage('${photosList[index].urls.small}'),
                           fit: BoxFit.cover,
                         ),
                         borderRadius: BorderRadius.circular(5),
                       ),
                     ),
-                    onTap: () async {
-                      String imgID = photosList[index].id!;
-                      var resultDetails = await _getCollResultDetail(imgID);
-                      Get.to(
-                        () => ImageInfoScreen(imageDetails: resultDetails),
-                        transition: Transition.cupertinoDialog,
-                      );
-                    },
                   ),
-                  height: MediaQuery.of(context).size.height * 0.75,
-                  width: MediaQuery.of(context).size.width * 0.50,
-                  margin: EdgeInsets.all(8),
                 );
               },
               staggeredTileBuilder: (int index) =>
-                  new StaggeredTile.count(2, index.isEven ? 3 : 1.5),
+                  StaggeredTile.count(2, index.isEven ? 3 : 1.5),
               shrinkWrap: true,
               itemCount: photosList.length,
               mainAxisSpacing: 1,

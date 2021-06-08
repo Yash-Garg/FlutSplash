@@ -1,6 +1,7 @@
-import 'package:flutsplash/models/links.dart';
-import 'package:flutsplash/models/profile.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../lniks/links.dart';
+import '../profile/profile.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';

@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
-import 'package:flutsplash/helpers/keys.dart';
-import 'package:flutsplash/main.dart';
-import 'package:flutsplash/screens/image_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+
+import '../../helpers/keys.dart';
+import '../../theme/app_theme.dart';
+import '../image_screens/image_info_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -13,16 +14,15 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  String accessKey = Keys.UNSPLASH_API_CLIENT_ID;
   late TextEditingController searchController;
   var searchResults;
   late bool hasResults;
   bool isSubmitted = false;
-  Dio dio = new Dio();
+  Dio dio = Dio();
 
   Future _getSearchResults(String query) async {
-    String searchURL =
-        "https://api.unsplash.com/search/photos?query=$query&client_id=$accessKey&per_page=20";
+    var searchURL =
+        'https://api.unsplash.com/search/photos?query=$query&client_id=$unsplashApiClientID&per_page=20';
     var response = await dio.get(searchURL);
     Map<String, dynamic> searchData = response.data;
     return searchData;
@@ -89,13 +89,13 @@ class _SearchScreenState extends State<SearchScreen> {
                   enableSuggestions: true,
                   controller: searchController,
                   decoration: InputDecoration(
-                    hintText: "Search images...",
+                    hintText: 'Search images...',
                     border: InputBorder.none,
                   ),
                   onSubmitted: (value) async {
                     searchResults = await _getSearchResults(value);
                     setState(() {
-                      if (searchResults["total"] == 0) {
+                      if (searchResults['total'] == 0) {
                         hasResults = false;
                       } else {
                         hasResults = true;
@@ -129,11 +129,11 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Widget _buildSearchResultList() {
-    var data = searchResults["results"];
+    var data = searchResults['results'];
 
     Future _getSearchResultDetail(String imageID) async {
-      var response = await dio
-          .get("https://api.unsplash.com/photos/$imageID?client_id=$accessKey");
+      var response = await dio.get(
+          'https://api.unsplash.com/photos/$imageID?client_id=$unsplashApiClientID');
       Map<String, dynamic> imageData = response.data;
       return imageData;
     }
@@ -146,7 +146,18 @@ class _SearchScreenState extends State<SearchScreen> {
                 physics: ScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
+                    height: MediaQuery.of(context).size.height * 0.75,
+                    width: MediaQuery.of(context).size.width * 0.50,
+                    margin: EdgeInsets.all(8),
                     child: InkWell(
+                      onTap: () async {
+                        String imgID = data[index]['id'];
+                        var resultDetails = await _getSearchResultDetail(imgID);
+                        await Get.to(
+                          () => ImageInfoScreen(imageDetails: resultDetails),
+                          transition: Transition.cupertinoDialog,
+                        );
+                      },
                       child: Container(
                         decoration: BoxDecoration(
                           image: DecorationImage(
@@ -157,22 +168,11 @@ class _SearchScreenState extends State<SearchScreen> {
                           borderRadius: BorderRadius.circular(5),
                         ),
                       ),
-                      onTap: () async {
-                        String imgID = data[index]['id'];
-                        var resultDetails = await _getSearchResultDetail(imgID);
-                        Get.to(
-                          () => ImageInfoScreen(imageDetails: resultDetails),
-                          transition: Transition.cupertinoDialog,
-                        );
-                      },
                     ),
-                    height: MediaQuery.of(context).size.height * 0.75,
-                    width: MediaQuery.of(context).size.width * 0.50,
-                    margin: EdgeInsets.all(8),
                   );
                 },
                 staggeredTileBuilder: (int index) =>
-                    new StaggeredTile.count(2, index.isEven ? 3 : 1.5),
+                    StaggeredTile.count(2, index.isEven ? 3 : 1.5),
                 shrinkWrap: true,
                 itemCount: data.length,
                 mainAxisSpacing: 2.0,

@@ -1,7 +1,8 @@
-import 'package:flutsplash/models/links.dart';
-import 'package:flutsplash/models/urls.dart';
-import 'package:flutsplash/models/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../lniks/links.dart';
+import '../urls/urls.dart';
+import '../user/user.dart';
 
 part 'photo.freezed.dart';
 part 'photo.g.dart';
@@ -16,7 +17,7 @@ class Photo with _$Photo {
     required int? height,
     required String? color,
     required String? blur_hash,
-    required dynamic? description,
+    required dynamic description,
     required Urls urls,
     required PhotoLinks links,
     required List<dynamic> categories,
