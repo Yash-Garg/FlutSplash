@@ -1,38 +1,26 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:get/get.dart';
 
 import '../../helpers/chrome_custom_tabs.dart';
 import '../../helpers/keys.dart';
 import '../../models/collection/collection.dart';
-import '../image_screens/image_info_screen.dart';
 
 class CollectionPhotos extends StatefulWidget {
-  final List<PreviewPhoto> photos;
-  final String collectionID;
-  final String userName;
-  final String coll;
-
-  CollectionPhotos({
-    required List<PreviewPhoto> photos,
-    required String collectionID,
-    required String userName,
-    required String coll,
-  })  : photos = photos,
-        collectionID = collectionID,
-        userName = userName,
-        coll = coll;
+  const CollectionPhotos({Key? key}) : super(key: key);
 
   @override
-  _CollectionPhotosState createState() =>
-      _CollectionPhotosState(photos, collectionID, userName, coll);
+  _CollectionPhotosState createState() => _CollectionPhotosState();
 }
 
 class _CollectionPhotosState extends State<CollectionPhotos> {
   Dio dio = Dio();
-  _CollectionPhotosState(List<PreviewPhoto> photos, String collectionID,
-      String userName, String coll);
+  List<PreviewPhoto> photos = Get.arguments[0];
+  String collectionID = Get.arguments[1];
+  String userName = Get.arguments[2];
+  String collName = Get.arguments[3];
 
   Future<Map<String, dynamic>> _getCollResultDetail(String imageID) async {
     var response = await dio.get(
@@ -43,11 +31,11 @@ class _CollectionPhotosState extends State<CollectionPhotos> {
 
   @override
   Widget build(BuildContext context) {
-    var photosList = widget.photos;
+    var photosList = photos;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          '${widget.coll}',
+          collName,
           style: TextStyle(
             color: Colors.black,
             fontSize: 16,
@@ -58,8 +46,7 @@ class _CollectionPhotosState extends State<CollectionPhotos> {
           IconButton(
             icon: Icon(Icons.open_in_new_rounded),
             onPressed: () {
-              openCustomTab(
-                  'https://unsplash.com/collections/${widget.collectionID}');
+              openCustomTab('https://unsplash.com/collections/$collectionID');
             },
           )
         ],
@@ -80,17 +67,20 @@ class _CollectionPhotosState extends State<CollectionPhotos> {
                   child: InkWell(
                     onTap: () async {
                       var imgID = photosList[index].id!;
-                      var resultDetails = await _getCollResultDetail(imgID);
-                      await Get.to(
-                        () => ImageInfoScreen(imageDetails: resultDetails),
-                        transition: Transition.cupertinoDialog,
+                      var resultDetails = await showDialog(
+                        context: context,
+                        builder: (context) =>
+                            FutureProgressDialog(_getCollResultDetail(imgID)),
+                      );
+                      await Get.toNamed(
+                        '/image/info',
+                        arguments: resultDetails,
                       );
                     },
                     child: Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image:
-                              NetworkImage('${photosList[index].urls.small}'),
+                          image: NetworkImage(photosList[index].urls.small),
                           fit: BoxFit.cover,
                         ),
                         borderRadius: BorderRadius.circular(5),

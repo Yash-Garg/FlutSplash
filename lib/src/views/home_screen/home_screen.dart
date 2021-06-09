@@ -10,7 +10,6 @@ import '../../helpers/chrome_custom_tabs.dart';
 import '../../theme/app_theme.dart';
 import '../collection_screens/collection_screen.dart';
 import '../photos_screen/photos_screen.dart';
-import '../search_screen/search_screen.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -20,7 +19,6 @@ class HomePage extends StatefulWidget {
 final tabs = ['HOME', 'COLLECTIONS'];
 
 class _HomePageState extends State<HomePage> {
-  bool isLoggedIN = false;
   TextEditingController textController = TextEditingController();
 
   PackageInfo packageInfo = PackageInfo(
@@ -50,8 +48,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildFab() => FloatingActionButton(
-        onPressed: () => Get.to(() => SearchScreen(),
-            transition: Transition.cupertinoDialog),
+        onPressed: () => Get.toNamed('/search'),
         child: IconButton(
           icon: Icon(Icons.search),
           onPressed: null,
@@ -88,32 +85,10 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               Container(
                 height: 150,
-                child: isLoggedIN
-                    ? Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            CircleAvatar(
-                              radius: 30,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Text(
-                                'FlutSplash',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : Image.asset(
-                        'images/header.png',
-                        fit: BoxFit.cover,
-                      ),
+                child: Image.asset(
+                  'images/header.png',
+                  fit: BoxFit.cover,
+                ),
               ),
               Divider(
                 height: 1,

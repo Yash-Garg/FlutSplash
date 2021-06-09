@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:get/get.dart';
 
 import '../../helpers/keys.dart';
 import '../../theme/app_theme.dart';
-import '../image_screens/image_info_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -93,7 +93,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     border: InputBorder.none,
                   ),
                   onSubmitted: (value) async {
-                    searchResults = await _getSearchResults(value);
+                    searchResults = await showDialog(
+                      context: context,
+                      builder: (context) =>
+                          FutureProgressDialog(_getSearchResults(value)),
+                    );
                     setState(() {
                       if (searchResults['total'] == 0) {
                         hasResults = false;
@@ -152,10 +156,14 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: InkWell(
                       onTap: () async {
                         String imgID = data[index]['id'];
-                        var resultDetails = await _getSearchResultDetail(imgID);
-                        await Get.to(
-                          () => ImageInfoScreen(imageDetails: resultDetails),
-                          transition: Transition.cupertinoDialog,
+                        var resultDetails = await showDialog(
+                          context: context,
+                          builder: (context) => FutureProgressDialog(
+                              _getSearchResultDetail(imgID)),
+                        );
+                        await Get.toNamed(
+                          '/image/info',
+                          arguments: resultDetails,
                         );
                       },
                       child: Container(

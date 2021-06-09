@@ -1,5 +1,6 @@
 import 'dart:io' as io;
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,25 +15,21 @@ import '../../helpers/keys.dart';
 import '../../helpers/path_manager.dart';
 import '../../helpers/permission_manager.dart';
 import '../../models/photo_details/photo_details.dart';
-import 'fullscreen_image.dart';
 
 class ImageInfoScreen extends StatefulWidget {
-  final Map<String, dynamic> imageDetails;
-
-  ImageInfoScreen({required Map<String, dynamic> imageDetails})
-      : imageDetails = imageDetails;
+  const ImageInfoScreen({Key? key}) : super(key: key);
 
   @override
-  _ImageInfoScreenState createState() => _ImageInfoScreenState(imageDetails);
+  _ImageInfoScreenState createState() => _ImageInfoScreenState();
 }
 
 class _ImageInfoScreenState extends State<ImageInfoScreen> {
-  _ImageInfoScreenState(Map<String, dynamic> imageDetails);
+  Map<String, dynamic> imageDetails = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
     var dio = Dio();
-    var data = PhotoDetails.fromJson(widget.imageDetails);
+    var data = PhotoDetails.fromJson(imageDetails);
 
     // EXIF Data
     var cameraModel = data.exif!.model ?? 'Unknown';
@@ -66,7 +63,7 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
           IconButton(
             icon: Icon(Icons.open_in_browser),
             onPressed: () {
-              openCustomTab('$webURL');
+              openCustomTab(webURL.toString());
             },
           ),
           IconButton(
@@ -88,11 +85,13 @@ class _ImageInfoScreenState extends State<ImageInfoScreen> {
           children: [
             InkWell(
               onTap: () {
-                Get.to(() => FullScreenImage(imageURL: rawImgURL));
+                Get.toNamed('/image/full', arguments: rawImgURL);
               },
               child: ClipRRect(
-                child: Image.network(
-                  imgURL,
+                child: CachedNetworkImage(
+                  imageUrl: imgURL,
+                  placeholder: (context, url) =>
+                      Center(child: CircularProgressIndicator()),
                   height: MediaQuery.of(context).size.height * 0.40,
                   width: MediaQuery.of(context).size.width,
                   fit: BoxFit.cover,

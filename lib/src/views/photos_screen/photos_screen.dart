@@ -1,11 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:get/get.dart';
 
 import '../../helpers/chrome_custom_tabs.dart';
 import '../../helpers/keys.dart';
 import '../../models/photo/photo.dart';
-import '../image_screens/image_info_screen.dart';
 import '../shimmer_loading/card_shimmer.dart';
 
 class LatestPhotos extends StatefulWidget {
@@ -89,16 +90,18 @@ class _LatestPhotosState extends State<LatestPhotos>
                               child: InkWell(
                                 onTap: () async {
                                   Map<String, dynamic> imgDetails =
-                                      await _getImageDetails('$imgID');
-                                  await Get.to(
-                                    () => ImageInfoScreen(
-                                      imageDetails: imgDetails,
-                                    ),
-                                    transition: Transition.cupertinoDialog,
+                                      await showDialog(
+                                    context: context,
+                                    builder: (context) => FutureProgressDialog(
+                                        _getImageDetails(imgID)),
                                   );
+                                  await Get.toNamed('/image/info',
+                                      arguments: imgDetails);
                                 },
-                                child: Image.network(
-                                  '$imageLink',
+                                child: CachedNetworkImage(
+                                  placeholder: (context, url) => Center(
+                                      child: CircularProgressIndicator()),
+                                  imageUrl: imageLink,
                                   height:
                                       MediaQuery.of(context).size.height * 0.25,
                                   width: MediaQuery.of(context).size.width,
@@ -108,11 +111,11 @@ class _LatestPhotosState extends State<LatestPhotos>
                             ),
                             InkWell(
                               onTap: () {
-                                openCustomTab('$creatorProfile');
+                                openCustomTab(creatorProfile);
                               },
                               child: ListTile(
                                 leading: CircleAvatar(
-                                  backgroundImage: NetworkImage('$userImage'),
+                                  backgroundImage: NetworkImage(userImage),
                                   radius: 25,
                                   backgroundColor: Colors.transparent,
                                 ),

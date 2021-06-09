@@ -1,12 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:get/get.dart';
 
 import '../../helpers/chrome_custom_tabs.dart';
 import '../../helpers/keys.dart';
 import '../../models/collection/collection.dart';
 import '../shimmer_loading/card_shimmer.dart';
-import 'collection_photos_screen.dart';
 
 class LatestCollections extends StatefulWidget {
   @override
@@ -90,17 +91,27 @@ class _LatestCollectionsState extends State<LatestCollections>
                                 ClipRRect(
                                   child: InkWell(
                                     onTap: () async {
-                                      var photosList =
-                                          await _fetchCollectionPhotos(coll.id);
-                                      await Get.to(() => CollectionPhotos(
-                                            photos: photosList,
-                                            collectionID: coll.id,
-                                            userName: collCreator,
-                                            coll: collectionTitle,
-                                          ));
+                                      var photosList = await showDialog(
+                                        context: context,
+                                        builder: (context) =>
+                                            FutureProgressDialog(
+                                          _fetchCollectionPhotos(coll.id),
+                                        ),
+                                      );
+                                      await Get.toNamed(
+                                        '/collection/photos',
+                                        arguments: [
+                                          photosList,
+                                          coll.id,
+                                          collCreator,
+                                          collectionTitle,
+                                        ],
+                                      );
                                     },
-                                    child: Image.network(
-                                      '$coverPhoto',
+                                    child: CachedNetworkImage(
+                                      imageUrl: coverPhoto,
+                                      placeholder: (context, url) => Center(
+                                          child: CircularProgressIndicator()),
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.25,
@@ -126,12 +137,12 @@ class _LatestCollectionsState extends State<LatestCollections>
                             ),
                             InkWell(
                               onTap: () {
-                                openCustomTab('$collCreatorProfile');
+                                openCustomTab(collCreatorProfile);
                               },
                               child: ListTile(
                                 leading: CircleAvatar(
                                   backgroundImage:
-                                      NetworkImage('$collCreatorImage'),
+                                      NetworkImage(collCreatorImage),
                                   radius: 25,
                                   backgroundColor: Colors.transparent,
                                 ),

@@ -1,11 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../theme/app_theme.dart';
-
 class FullScreenImage extends StatelessWidget {
-  final String imageURL;
-  const FullScreenImage({Key? key, required this.imageURL}) : super(key: key);
+  final String imageURL = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -13,21 +11,14 @@ class FullScreenImage extends StatelessWidget {
       onTap: () {
         Get.back();
       },
-      child: Container(
-        color: Colors.black.withOpacity(0.8),
-        height: double.infinity,
-        width: double.infinity,
-        child: Image.network(
-          '$imageURL',
-          fit: BoxFit.fitWidth,
-          loadingBuilder: (context, child, loadingProgress) {
-            if (loadingProgress == null) return child;
-            return Center(
-              child: CircularProgressIndicator(
-                backgroundColor: accentClr,
-              ),
-            );
-          },
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: CachedNetworkImage(
+          fit: BoxFit.contain,
+          imageUrl: imageURL,
+          placeholder: (context, url) =>
+              Center(child: CircularProgressIndicator()),
+          errorWidget: (context, url, error) => Icon(Icons.error),
         ),
       ),
     );
