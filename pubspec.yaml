@@ -33,10 +33,21 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner: ^2.0.4
+  flutter_launcher_icons: ^0.9.0
   freezed: ^0.14.2
   json_serializable: ^4.1.3
+
+flutter_icons:
+  android: true
+  ios: false
+  remove_alpha_ios: true
+  image_path_ios: "assets/icons/ic_launcher.png"
+  image_path_android: "assets/icons/ic_launcher.png"
+  adaptive_icon_background: "#fff7ef"
+  adaptive_icon_foreground: "assets/icons/ic_icon.png"
 
 flutter:
   uses-material-design: true
   assets:
-    - images/header.png
+    - assets/header.png
+    - assets/icons/

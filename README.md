@@ -1,14 +1,14 @@
 # FlutSplash
 
 <a href="https://play.google.com/store/apps/details?id=com.yashgarg.flutsplash">
-  <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" 
+  <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
        alt="Get it on Google Play"
        height="80" />
 </a>
 
-| ![screen 1](https://raw.githubusercontent.com/Yash-Garg/FlutSplash/main/images/screen-1.png) | ![screen 2](https://raw.githubusercontent.com/Yash-Garg/FlutSplash/main/images/screen-2.png) |
+| ![screen 1](https://raw.githubusercontent.com/Yash-Garg/FlutSplash/main/assets/screen-1.png) | ![screen 2](https://raw.githubusercontent.com/Yash-Garg/FlutSplash/main/assets/screen-2.png) |
 | :------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: |
-| ![screen 3](https://raw.githubusercontent.com/Yash-Garg/FlutSplash/main/images/screen-3.png) | ![screen 4](https://raw.githubusercontent.com/Yash-Garg/FlutSplash/main/images/screen-4.png) |
+| ![screen 3](https://raw.githubusercontent.com/Yash-Garg/FlutSplash/main/assets/screen-3.png) | ![screen 4](https://raw.githubusercontent.com/Yash-Garg/FlutSplash/main/assets/screen-4.png) |
 
 ## License
 

@@ -13,7 +13,7 @@ class _ShimmerCardsState extends State<ShimmerCards> {
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
       baseColor: accentClr,
-      highlightColor: Colors.black38,
+      highlightColor: Colors.grey,
       child: ListView.builder(
         itemCount: 10,
         itemBuilder: (context, index) {
