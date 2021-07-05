@@ -1,14 +1,41 @@
 # FlutSplash
 
+Minimal Unsplash Android App to easily search and download images I made while learning and exploring Flutter.
+
 <a href="https://play.google.com/store/apps/details?id=com.yashgarg.flutsplash">
   <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
        alt="Get it on Google Play"
        height="80" />
 </a>
 
+## Screenshots
 | ![screen 1](https://raw.githubusercontent.com/Yash-Garg/FlutSplash/main/assets/screen-1.png) | ![screen 2](https://raw.githubusercontent.com/Yash-Garg/FlutSplash/main/assets/screen-2.png) |
 | :------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: |
 | ![screen 3](https://raw.githubusercontent.com/Yash-Garg/FlutSplash/main/assets/screen-3.png) | ![screen 4](https://raw.githubusercontent.com/Yash-Garg/FlutSplash/main/assets/screen-4.png) |
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/Yash-Garg/FlutSplash
+```
+
+Set the unsplash client ID here - [keys.dart](https://github.com/Yash-Garg/FlutSplash/blob/main/lib/src/helpers/keys.dart)
+
+Go to the project directory
+
+```bash
+  cd FlutSplash
+```
+
+Run the app
+
+```bash
+  flutter run
+```
+
+Also, Thanks to [this website](https://bestofflutter.com/repo/Yash-Garg-FlutSplash-flutter-image) for featuring my app!
 
 ## License
 
