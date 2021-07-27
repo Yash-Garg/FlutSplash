@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../lniks/links.dart';
+import '../links/links.dart';
 import '../urls/urls.dart';
 import '../user/user.dart';
 
